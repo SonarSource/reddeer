@@ -180,11 +180,19 @@
 			<layout>p2</layout>
 			<url>https://download.eclipse.org/datatools/updates/1.14.100-SNAPSHOT/repository</url>
 		</repository>
+
+		<!--
+			If the build fails due to no repository found at this specific URL, just navigate to
+			"https://download.eclipse.org/tm/updates/" and replace this with the first one shown
+			having a "-SNAPSHOT" in its name. If none is found, just remove this "repository" block
+			as it is only used for testing.
+		-->
 		<repository>
 			<id>rse</id>
 			<layout>p2</layout>
-			<url>https://download.eclipse.org/tm/updates/3.7.100-SNAPSHOT/repository/</url>
+			<url>https://download.eclipse.org/tm/updates/4.5.700-SNAPSHOT/repository/</url>
 		</repository>
+
 		<repository>
 			<id>mylyn</id>
 			<layout>p2</layout>
