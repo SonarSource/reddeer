@@ -1,63 +1,63 @@
-# Eclipse RedDeer Testing Framework
+# Eclipse RedDeer fork configured to only work with SonarQube for Eclipse
 
-Eclipse [RedDeer](http://www.eclipse.org/reddeer) project is an extensible framework used for development of automated SWT/Eclipse tests which interacts with application’s user interface. RedDeer provides the PageObjects API for comfortable testing of standard SWT (Buttons, Trees..), JFace (UIForms), Workbench (Views, Editors, ..) and Eclipse (Wizards, Preferences,...) components and also allows creating and extending your own components. RedDeer also provides capabilities to work with graphical editors based on GEF or Graphiti.
+This an **unoffical** fork of Eclipse [RedDeer](http://www.eclipse.org/reddeer) that follows the
+approach "it works on my machine". In our case this fork should just be working for our
+[SonarQube for Eclipse plug-in](https://github.com/SonarSource/sonarlint-eclipse).
 
-Eclipse RedDeer is extensively tested on Linux/CentOS platform. Examination of test results in CI environment is easier thanks to capturing screenshots on test failures and collecting Eclipse Platform log.
+It is not intended for adding new features or doing bug fixes but rather to keep it compatible with
+our CI build for the product as well as the latest released versions of the Eclipse IDE.
 
-## At this time RedDeer is not actively maintained
+> [!IMPORTANT]
+> 
+> Please do not reach out to us about providing support for this fork. It is meant to only work for
+> our specific needs and it is only a coincidence that this might also work for your needs.
 
-We are not currently actively developing and maintaining the framework, in case that you are interested in the maintaining the project, please contact the [project leads](https://projects.eclipse.org/projects/technology.reddeer/who).
+## Archived Eclipse Project
 
-# Get the code
+For more information about the official but archived Eclipse project, have a look at its
+[GitHub repository](https://github.com/eclipse-archived/reddeer).
 
-The easiest way to get started with the code is to [create your own fork](https://help.github.com/en/articles/fork-a-repo), 
-then clone your fork and finally add upstream:
+## Official documentation
 
-    $ git clone git@github.com:<you>/reddeer.git
-    $ cd reddeer
-    $ git remote add upstream http://github.com/eclipse/reddeer.git
-    
-# Build RedDeer locally
+To get started with working with Eclipse RedDeer and implementing tests, check the official but
+archived [Documentation](https://github.com/eclipse/reddeer/wiki).
 
-In case that you have the git repo cloned locally, you can build it using maven:
+# Build the p2 repository (Eclipse Update Site) locally
 
-    $ mvn clean install
-    
-If you just want to build the base and not to run tests, use this:
+To build this fork locally, clone this repository and switch to the branch you want to build,
+currently there are two:
 
-    $ mvn clean install -DskipTests=true
+- `master` based on the official `4.7.0` release adapted to our needs
+- `branch-4.2.0` based on the official `4.2.0` release adapted to our needs
 
-# Installation
+After that, run Maven, using Tycho, to build all bundles, features and the official Eclipse Update
+Site. We have to disable the tests as there are failing ones and the tests are not split from the
+main build like it is done on the SonarQube for Eclipse repository.
 
-## Using RedDeer eclipse update site
+> mvn clean verify -DskipTests
 
-Copy-Paste this URL to Eclipse Help -> Install New Software...:
-```
-http://download.eclipse.org/reddeer/releases/latest
-```
-Or latest nightly build:
-```
-http://download.eclipse.org/reddeer/snapshots
-```
-Finish the installation & restart IDE.
+### Running unit / integration tests
 
-## Using locally built artifacts
+To run the unit / integration tests run Maven, using Tycho and the tests based on Eclipse
+[SWTBot](https://projects.eclipse.org/projects/technology.swtbot).
 
-Search your repo for path-to-your-git/reddeer/site/repository and paste this path to Eclipse Help -> Install New Software...
+> mvn clean verify -Dmaven.test.failure.ignore=true
 
-# Getting Started
+This way the build does not fail fast and all tests are run and afterwards the results are
+available.
 
-Go through [Getting Started guide](https://github.com/eclipse/reddeer/wiki/Getting-Started).
+### Using locally built artifacts
 
-# Documentation
+Once built the Eclipse Update Site can be found inside the this folder structure at
+**site/target/repository**. Get the path and use it in `Eclipse Help -> Install New Software...` to
+install the plug-in(s) inside the running application.
 
-See [RedDeer Documentation](https://github.com/eclipse/reddeer/wiki).
+## Local development environment
 
-# Contributing
+Sadly Eclipse RedDeer does not provide a
+[target platform](https://help.eclipse.org/latest/index.jsp?topic=%2Forg.eclipse.pde.doc.user%2Fconcepts%2Ftarget.htm)
+for development and some plug-ins required cannot be installed on the newest version of the Eclipse
+IDE anymore.
 
-See [how to contribute](https://github.com/eclipse/reddeer/blob/master/CONTRIBUTING.md) to the project.
-
-# Contact us
-
-* Contact us on [Mailing List](https://dev.eclipse.org/mailman/listinfo/reddeer-dev)
-* Our [Homepage](http://www.eclipse.org/reddeer)
+But for just maintaining a working Maven/Tycho build relying on other editors like
+*Visual Studio Code* and running the build via Maven in the shell should be sufficient.
