@@ -88,7 +88,7 @@ qa_task:
     memory: 16G
     type: m6a.large
   env:
-    DISPLAY: 10
+    DISPLAY: :10
     MAVEN_OPTS: -Xmx3072m
   pre_recording_script: |
     set -euo pipefail
