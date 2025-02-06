@@ -38,4 +38,12 @@
 		</plugins>
 	</build>
 
+	<profiles>
+		<profile>
+			<id>e4.workbench-skipTests</id>
+			<properties>
+				<skipTests>true</skipTests>
+			</properties>
+		</profile>
+	</profiles>
 </project>

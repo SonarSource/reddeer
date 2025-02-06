@@ -67,6 +67,13 @@
 				</plugins>
 			</build>
 		</profile>
+
+		<profile>
+			<id>requirements-skipTests</id>
+			<properties>
+				<skipTests>true</skipTests>
+			</properties>
+		</profile>
 	</profiles>
 
 	<build>

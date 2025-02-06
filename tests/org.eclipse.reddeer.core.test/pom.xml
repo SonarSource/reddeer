@@ -61,6 +61,13 @@
 				</plugins>
 			</build>
 		</profile>
+
+		<profile>
+			<id>core-skipTests</id>
+			<properties>
+				<skipTests>true</skipTests>
+			</properties>
+		</profile>
 	</profiles>
 	<build>
 		<plugins>

@@ -36,6 +36,23 @@
 		<surefire.timeout>2400</surefire.timeout>
 	</properties>
 
+	<modules>
+		<module>org.eclipse.reddeer.common.test</module>
+		<module>org.eclipse.reddeer.core.test</module>
+		<module>org.eclipse.reddeer.swt.test</module>
+		<module>org.eclipse.reddeer.workbench.test</module>
+		<module>org.eclipse.reddeer.uiforms.test</module>
+		<module>org.eclipse.reddeer.jface.test</module>
+		<module>org.eclipse.reddeer.eclipse.test</module>
+		<module>org.eclipse.reddeer.gef.test</module>
+		<module>org.eclipse.reddeer.graphiti.test</module>
+		<module>org.eclipse.reddeer.direct.test</module>
+		<module>org.eclipse.reddeer.junit.test</module>
+		<module>org.eclipse.reddeer.requirements.test</module>
+		<module>org.eclipse.reddeer.ui.test</module>
+		<module>org.eclipse.reddeer.e4.workbench.test</module>
+		<module>org.eclipse.reddeer.integration.test</module>
+	</modules>
 	<build>
 		<plugins>
 			<plugin>
@@ -120,135 +137,6 @@
 				<!-- THE FOLLOWING LINE MUST NOT BE BROKEN BY AUTOFORMATTING -->
 				<platformSystemProperties> -XstartOnFirstThread </platformSystemProperties>
 			</properties>
-		</profile>
-
-
-		<!--
-			These profiles are used for Cirrus CI in order to disable specific modules when
-			parallelizing the unit / integration tests. See the README.md file for more information
-			on how to run this locally and ".cirrus.yml" in the root of the repository for how the
-			profiles are used to parallellize running all the tests.
-		-->
-
-
-		<profile>
-			<id>common</id>
-			<activation><file><exists>pom.xml</exists></file></activation>
-			<modules>
-				<module>org.eclipse.reddeer.common.test</module>
-			</modules>
-		</profile>
-
-		<profile>
-			<id>core</id>
-			<activation><file><exists>pom.xml</exists></file></activation>
-			<modules>
-				<module>org.eclipse.reddeer.core.test</module>
-			</modules>
-		</profile>
-
-		<profile>
-			<id>swt</id>
-			<activation><file><exists>pom.xml</exists></file></activation>
-			<modules>
-				<module>org.eclipse.reddeer.swt.test</module>
-			</modules>
-		</profile>
-
-		<profile>
-			<id>workbench</id>
-			<activation><file><exists>pom.xml</exists></file></activation>
-			<modules>
-				<module>org.eclipse.reddeer.workbench.test</module>
-			</modules>
-		</profile>
-
-		<profile>
-			<id>uiforms</id>
-			<activation><file><exists>pom.xml</exists></file></activation>
-			<modules>
-				<module>org.eclipse.reddeer.uiforms.test</module>
-			</modules>
-		</profile>
-
-		<profile>
-			<id>jface</id>
-			<activation><file><exists>pom.xml</exists></file></activation>
-			<modules>
-				<module>org.eclipse.reddeer.jface.test</module>
-			</modules>
-		</profile>
-
-		<profile>
-			<id>eclipse</id>
-			<activation><file><exists>pom.xml</exists></file></activation>
-			<modules>
-				<module>org.eclipse.reddeer.eclipse.test</module>
-			</modules>
-		</profile>
-
-		<profile>
-			<id>gef</id>
-			<activation><file><exists>pom.xml</exists></file></activation>
-			<modules>
-				<module>org.eclipse.reddeer.gef.test</module>
-			</modules>
-		</profile>
-
-		<profile>
-			<id>graphiti</id>
-			<activation><file><exists>pom.xml</exists></file></activation>
-			<modules>
-				<module>org.eclipse.reddeer.graphiti.test</module>
-			</modules>
-		</profile>
-
-		<profile>
-			<id>direct</id>
-			<activation><file><exists>pom.xml</exists></file></activation>
-			<modules>
-				<module>org.eclipse.reddeer.direct.test</module>
-			</modules>
-		</profile>
-
-		<profile>
-			<id>junit</id>
-			<activation><file><exists>pom.xml</exists></file></activation>
-			<modules>
-				<module>org.eclipse.reddeer.junit.test</module>
-			</modules>
-		</profile>
-
-		<profile>
-			<id>requirements</id>
-			<activation><file><exists>pom.xml</exists></file></activation>
-			<modules>
-				<module>org.eclipse.reddeer.requirements.test</module>
-			</modules>
-		</profile>
-
-		<profile>
-			<id>ui</id>
-			<activation><file><exists>pom.xml</exists></file></activation>
-			<modules>
-				<module>org.eclipse.reddeer.ui.test</module>
-			</modules>
-		</profile>
-
-		<profile>
-			<id>e4.workbench</id>
-			<activation><file><exists>pom.xml</exists></file></activation>
-			<modules>
-				<module>org.eclipse.reddeer.e4.workbench.test</module>
-			</modules>
-		</profile>
-
-		<profile>
-			<id>integration</id>
-			<activation><file><exists>pom.xml</exists></file></activation>
-			<modules>
-				<module>org.eclipse.reddeer.integration.test</module>
-			</modules>
 		</profile>
 	</profiles>
 </project>

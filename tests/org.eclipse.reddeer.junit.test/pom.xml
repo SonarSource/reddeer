@@ -58,4 +58,12 @@
 		</plugins>
 	</build>
 
+	<profiles>
+		<profile>
+			<id>junit-skipTests</id>
+			<properties>
+				<skipTests>true</skipTests>
+			</properties>
+		</profile>
+	</profiles>
 </project>

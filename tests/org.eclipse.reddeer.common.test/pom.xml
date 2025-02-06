@@ -33,4 +33,12 @@
 		</dependency>
 	</dependencies>
 
+	<profiles>
+		<profile>
+			<id>common-skipTests</id>
+			<properties>
+				<skipTests>true</skipTests>
+			</properties>
+		</profile>
+	</profiles>
 </project>

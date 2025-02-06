@@ -61,4 +61,12 @@
 		</plugins>
 	</build>
 
+	<profiles>
+		<profile>
+			<id>gef-skipTests</id>
+			<properties>
+				<skipTests>true</skipTests>
+			</properties>
+		</profile>
+	</profiles>
 </project>

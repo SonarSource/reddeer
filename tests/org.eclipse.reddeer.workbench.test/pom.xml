@@ -60,6 +60,13 @@
 				</plugins>
 			</build>
 		</profile>
+
+		<profile>
+			<id>workbench-skipTests</id>
+			<properties>
+				<skipTests>true</skipTests>
+			</properties>
+		</profile>
 	</profiles>
 	<build>
 		<plugins>

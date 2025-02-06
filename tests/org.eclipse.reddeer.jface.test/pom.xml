@@ -60,5 +60,12 @@
 				</plugins>
 			</build>
 		</profile>
+
+		<profile>
+			<id>jface-skipTests</id>
+			<properties>
+				<skipTests>true</skipTests>
+			</properties>
+		</profile>
 	</profiles>
 </project>
