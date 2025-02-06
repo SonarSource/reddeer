@@ -80,6 +80,7 @@ build_task:
 # We run all the unit tests and SWT/RedDeer integration tests in the repository ignoring failing
 # tests as it was also the case in the official Eclipse project. Afterwards uploading the recording
 # and its log as well as the jUnit artifacts.
+# We run all the different test bundles in parallel to speed up the CI!
 qa_task:
   <<: *ONLY_IF
   eks_container:
@@ -90,18 +91,66 @@ qa_task:
   env:
     DISPLAY: :10
     MAVEN_OPTS: -Xmx3072m
+  matrix:
+    -env:
+      BUNDLE: "org.eclipse.reddeer.common.test"
+      PROFILE: "\!core,\!direct,\!e4.workbench,\!eclipse,\!gef,\!graphiti,\!integration,\!jface,\!junit,\!requirements,\!swt,\!ui,\!uiforms,\!workbench"
+    -env:
+      BUNDLE: "org.eclipse.reddeer.core.test"
+      PROFILE: "\!common,\!direct,\!e4.workbench,\!eclipse,\!gef,\!graphiti,\!integration,\!jface,\!junit,\!requirements,\!swt,\!ui,\!uiforms,\!workbench"
+    -env:
+      BUNDLE: "org.eclipse.reddeer.direct.test"
+      PROFILE: "\!common,\!core,\!e4.workbench,\!eclipse,\!gef,\!graphiti,\!integration,\!jface,\!junit,\!requirements,\!swt,\!ui,\!uiforms,\!workbench"
+    -env:
+      BUNDLE: "org.eclipse.reddeer.e4.workbench.test"
+      PROFILE: "\!common,\!core,\!direct,\!eclipse,\!gef,\!graphiti,\!integration,\!jface,\!junit,\!requirements,\!swt,\!ui,\!uiforms,\!workbench"
+    -env:
+      BUNDLE: "org.eclipse.reddeer.eclipse.test"
+      PROFILE: "\!common,\!core,\!direct,\!e4.workbench,\!gef,\!graphiti,\!integration,\!jface,\!junit,\!requirements,\!swt,\!ui,\!uiforms,\!workbench"
+    -env:
+      BUNDLE: "org.eclipse.reddeer.gef.test"
+      PROFILE: "\!common,\!core,\!direct,\!e4.workbench,\!eclipse,\!graphiti,\!integration,\!jface,\!junit,\!requirements,\!swt,\!ui,\!uiforms,\!workbench"
+    -env:
+      BUNDLE: "org.eclipse.reddeer.graphiti.test"
+      PROFILE: "\!common,\!core,\!direct,\!e4.workbench,\!eclipse,\!gef,\!integration,\!jface,\!junit,\!requirements,\!swt,\!ui,\!uiforms,\!workbench"
+    -env:
+      BUNDLE: "org.eclipse.reddeer.integration.test"
+      PROFILE: "\!common,\!core,\!direct,\!e4.workbench,\!eclipse,\!gef,\!graphiti,\!jface,\!junit,\!requirements,\!swt,\!ui,\!uiforms,\!workbench"
+    -env:
+      BUNDLE: "org.eclipse.reddeer.jface.test"
+      PROFILE: "\!common,\!core,\!direct,\!e4.workbench,\!eclipse,\!gef,\!graphiti,\!integration,\!junit,\!requirements,\!swt,\!ui,\!uiforms,\!workbench"
+    -env:
+      BUNDLE: "org.eclipse.reddeer.junit.test"
+      PROFILE: "\!common,\!core,\!direct,\!e4.workbench,\!eclipse,\!gef,\!graphiti,\!integration,\!jface,\!requirements,\!swt,\!ui,\!uiforms,\!workbench"
+    -env:
+      BUNDLE: "org.eclipse.reddeer.requirements.test"
+      PROFILE: "\!common,\!core,\!direct,\!e4.workbench,\!eclipse,\!gef,\!graphiti,\!integration,\!jface,\!junit,\!swt,\!ui,\!uiforms,\!workbench"
+    -env:
+      BUNDLE: "org.eclipse.reddeer.swt.test"
+      PROFILE: "\!common,\!core,\!direct,\!e4.workbench,\!eclipse,\!gef,\!graphiti,\!integration,\!jface,\!junit,\!requirements,\!ui,\!uiforms,\!workbench"
+    -env:
+      BUNDLE: "org.eclipse.reddeer.ui.test"
+      PROFILE: "\!common,\!core,\!direct,\!e4.workbench,\!eclipse,\!gef,\!graphiti,\!integration,\!jface,\!junit,\!requirements,\!swt,\!uiforms,\!workbench"
+    -env:
+      BUNDLE: "org.eclipse.reddeer.uiforms.test"
+      PROFILE: "\!common,\!core,\!direct,\!e4.workbench,\!eclipse,\!gef,\!graphiti,\!integration,\!jface,\!junit,\!requirements,\!swt,\!ui,\!workbench"
+    -env:
+      BUNDLE: "org.eclipse.reddeer.workbench.test"
+      PROFILE: "\!common,\!core,\!direct,\!e4.workbench,\!eclipse,\!gef,\!graphiti,\!integration,\!jface,\!junit,\!requirements,\!swt,\!ui,\!uiforms"
   pre_recording_background_script: |
     set -euo pipefail
     /etc/init.d/xvfb start
     metacity --sm-disable --replace &
     sleep 10 # give metacity some time to start
     echo 'Recording tests on video'
-    ffmpeg -loglevel warning -f x11grab -video_size 1920x1080 -i ${DISPLAY} -codec:v libx264 -r 12 ${CIRRUS_WORKING_DIR}/recording.mp4
+    ffmpeg -loglevel warning -f x11grab -video_size 1920x1080 -i ${DISPLAY} -codec:v libx264 -r 12 ${CIRRUS_WORKING_DIR}/${BUNDLE}.mp4
   run_tests_script: |
+    echo "Run unit / integration tests for bundle ${BUNDLE}"
     source cirrus-env QA
     source .cirrus/set_maven_build_version "$BUILD_NUMBER"
     mvn clean verify \
       -B -e -V \
+      -P${PROFILE} \
       -Dmaven.test.failure.ignore=true
   always:
     post_recording_script: |
@@ -109,7 +158,7 @@ qa_task:
       while pgrep ffmpeg >/dev/null; do sleep 1; done
       /etc/init.d/xvfb stop
     recording_artifacts:
-      path: "${CIRRUS_WORKING_DIR}/recording.mp4"
+      path: "${CIRRUS_WORKING_DIR}/${BUNDLE}.mp4"
       type: application/mp4
     xvfb_log_artifacts:
       path: "${CIRRUS_WORKING_DIR}/Xvfb.out"
