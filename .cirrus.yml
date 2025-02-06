@@ -94,49 +94,49 @@ qa_task:
   matrix:
     -env:
       BUNDLE: "org.eclipse.reddeer.common.test"
-      PROFILE: "\!core,\!direct,\!e4.workbench,\!eclipse,\!gef,\!graphiti,\!integration,\!jface,\!junit,\!requirements,\!swt,\!ui,\!uiforms,\!workbench"
+      PROFILE: "-core,-direct,-e4.workbench,-eclipse,-gef,-graphiti,-integration,-jface,-junit,-requirements,-swt,-ui,-uiforms,-workbench"
     -env:
       BUNDLE: "org.eclipse.reddeer.core.test"
-      PROFILE: "\!common,\!direct,\!e4.workbench,\!eclipse,\!gef,\!graphiti,\!integration,\!jface,\!junit,\!requirements,\!swt,\!ui,\!uiforms,\!workbench"
+      PROFILE: "-common,-direct,-e4.workbench,-eclipse,-gef,-graphiti,-integration,-jface,-junit,-requirements,-swt,-ui,-uiforms,-workbench"
     -env:
       BUNDLE: "org.eclipse.reddeer.direct.test"
-      PROFILE: "\!common,\!core,\!e4.workbench,\!eclipse,\!gef,\!graphiti,\!integration,\!jface,\!junit,\!requirements,\!swt,\!ui,\!uiforms,\!workbench"
+      PROFILE: "-common,-core,-e4.workbench,-eclipse,-gef,-graphiti,-integration,-jface,-junit,-requirements,-swt,-ui,-uiforms,-workbench"
     -env:
       BUNDLE: "org.eclipse.reddeer.e4.workbench.test"
-      PROFILE: "\!common,\!core,\!direct,\!eclipse,\!gef,\!graphiti,\!integration,\!jface,\!junit,\!requirements,\!swt,\!ui,\!uiforms,\!workbench"
+      PROFILE: "-common,-core,-direct,-eclipse,-gef,-graphiti,-integration,-jface,-junit,-requirements,-swt,-ui,-uiforms,-workbench"
     -env:
       BUNDLE: "org.eclipse.reddeer.eclipse.test"
-      PROFILE: "\!common,\!core,\!direct,\!e4.workbench,\!gef,\!graphiti,\!integration,\!jface,\!junit,\!requirements,\!swt,\!ui,\!uiforms,\!workbench"
+      PROFILE: "-common,-core,-direct,-e4.workbench,-gef,-graphiti,-integration,-jface,-junit,-requirements,-swt,-ui,-uiforms,-workbench"
     -env:
       BUNDLE: "org.eclipse.reddeer.gef.test"
-      PROFILE: "\!common,\!core,\!direct,\!e4.workbench,\!eclipse,\!graphiti,\!integration,\!jface,\!junit,\!requirements,\!swt,\!ui,\!uiforms,\!workbench"
+      PROFILE: "-common,-core,-direct,-e4.workbench,-eclipse,-graphiti,-integration,-jface,-junit,-requirements,-swt,-ui,-uiforms,-workbench"
     -env:
       BUNDLE: "org.eclipse.reddeer.graphiti.test"
-      PROFILE: "\!common,\!core,\!direct,\!e4.workbench,\!eclipse,\!gef,\!integration,\!jface,\!junit,\!requirements,\!swt,\!ui,\!uiforms,\!workbench"
+      PROFILE: "-common,-core,-direct,-e4.workbench,-eclipse,-gef,-integration,-jface,-junit,-requirements,-swt,-ui,-uiforms,-workbench"
     -env:
       BUNDLE: "org.eclipse.reddeer.integration.test"
-      PROFILE: "\!common,\!core,\!direct,\!e4.workbench,\!eclipse,\!gef,\!graphiti,\!jface,\!junit,\!requirements,\!swt,\!ui,\!uiforms,\!workbench"
+      PROFILE: "-common,-core,-direct,-e4.workbench,-eclipse,-gef,-graphiti,-jface,-junit,-requirements,-swt,-ui,-uiforms,-workbench"
     -env:
       BUNDLE: "org.eclipse.reddeer.jface.test"
-      PROFILE: "\!common,\!core,\!direct,\!e4.workbench,\!eclipse,\!gef,\!graphiti,\!integration,\!junit,\!requirements,\!swt,\!ui,\!uiforms,\!workbench"
+      PROFILE: "-common,-core,-direct,-e4.workbench,-eclipse,-gef,-graphiti,-integration,-junit,-requirements,-swt,-ui,-uiforms,-workbench"
     -env:
       BUNDLE: "org.eclipse.reddeer.junit.test"
-      PROFILE: "\!common,\!core,\!direct,\!e4.workbench,\!eclipse,\!gef,\!graphiti,\!integration,\!jface,\!requirements,\!swt,\!ui,\!uiforms,\!workbench"
+      PROFILE: "-common,-core,-direct,-e4.workbench,-eclipse,-gef,-graphiti,-integration,-jface,-requirements,-swt,-ui,-uiforms,-workbench"
     -env:
       BUNDLE: "org.eclipse.reddeer.requirements.test"
-      PROFILE: "\!common,\!core,\!direct,\!e4.workbench,\!eclipse,\!gef,\!graphiti,\!integration,\!jface,\!junit,\!swt,\!ui,\!uiforms,\!workbench"
+      PROFILE: "-common,-core,-direct,-e4.workbench,-eclipse,-gef,-graphiti,-integration,-jface,-junit,-swt,-ui,-uiforms,-workbench"
     -env:
       BUNDLE: "org.eclipse.reddeer.swt.test"
-      PROFILE: "\!common,\!core,\!direct,\!e4.workbench,\!eclipse,\!gef,\!graphiti,\!integration,\!jface,\!junit,\!requirements,\!ui,\!uiforms,\!workbench"
+      PROFILE: "-common,-core,-direct,-e4.workbench,-eclipse,-gef,-graphiti,-integration,-jface,-junit,-requirements,-ui,-uiforms,-workbench"
     -env:
       BUNDLE: "org.eclipse.reddeer.ui.test"
-      PROFILE: "\!common,\!core,\!direct,\!e4.workbench,\!eclipse,\!gef,\!graphiti,\!integration,\!jface,\!junit,\!requirements,\!swt,\!uiforms,\!workbench"
+      PROFILE: "-common,-core,-direct,-e4.workbench,-eclipse,-gef,-graphiti,-integration,-jface,-junit,-requirements,-swt,-uiforms,-workbench"
     -env:
       BUNDLE: "org.eclipse.reddeer.uiforms.test"
-      PROFILE: "\!common,\!core,\!direct,\!e4.workbench,\!eclipse,\!gef,\!graphiti,\!integration,\!jface,\!junit,\!requirements,\!swt,\!ui,\!workbench"
+      PROFILE: "-common,-core,-direct,-e4.workbench,-eclipse,-gef,-graphiti,-integration,-jface,-junit,-requirements,-swt,-ui,-workbench"
     -env:
       BUNDLE: "org.eclipse.reddeer.workbench.test"
-      PROFILE: "\!common,\!core,\!direct,\!e4.workbench,\!eclipse,\!gef,\!graphiti,\!integration,\!jface,\!junit,\!requirements,\!swt,\!ui,\!uiforms"
+      PROFILE: "-common,-core,-direct,-e4.workbench,-eclipse,-gef,-graphiti,-integration,-jface,-junit,-requirements,-swt,-ui,-uiforms"
   pre_recording_background_script: |
     set -euo pipefail
     /etc/init.d/xvfb start
@@ -169,7 +169,7 @@ qa_task:
       format: junit
   on_failure:
     slack_notification_script: |
-      source slack-failure-notification "RedDeer fork UTs/ITs failed"
+      source slack-failure-notification "RedDeer fork UTs/ITs failed for: ${BUNDLE}"
 
 
 # 6) Promotion (depends on Build and QA)
