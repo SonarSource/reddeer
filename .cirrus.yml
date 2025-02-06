@@ -79,7 +79,7 @@ build_task:
 # We run all the unit tests and SWT/RedDeer integration tests in the repository ignoring failing
 # tests as it was also the case in the official Eclipse project. Afterwards uploading the recording
 # and its log as well as the jUnit artifacts.
-qa_taks:
+qa_task:
   <<: *ONLY_IF
   eks_container:
     <<: *BUILDER_CONTAINER_DEFINITION
