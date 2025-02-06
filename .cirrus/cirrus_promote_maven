@@ -6,6 +6,7 @@
 
 set -euo pipefail
 
+source cirrus-env PROMOTE
 source .cirrus/set_maven_build_version "$BUILD_NUMBER"
 
 if [[ ! -v GITHUB_TOKEN ]]; then
