@@ -90,7 +90,7 @@ qa_task:
   env:
     DISPLAY: :10
     MAVEN_OPTS: -Xmx3072m
-  pre_recording_script: |
+  pre_recording_background_script: |
     set -euo pipefail
     /etc/init.d/xvfb start
     metacity --sm-disable --replace &
