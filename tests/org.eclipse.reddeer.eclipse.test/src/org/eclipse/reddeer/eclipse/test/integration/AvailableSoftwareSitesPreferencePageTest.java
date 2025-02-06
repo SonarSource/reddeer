@@ -51,7 +51,9 @@ public class AvailableSoftwareSitesPreferencePageTest {
 	private final static String ECLIPSE = "Eclipse";
 	private final static String ECLIPSE_URL = "https://download.eclipse.org/releases/latest";
 	private final static String REDDEER = "RedDeer";
-	private final static String REDDEER_URL = "http://download.eclipse.org/reddeer/releases/latest";
+
+	// SLE-1056: Changed in order to make this test pass and not mislead other tests!
+	private final static String REDDEER_URL = "https://repox.jfrog.io/artifactory/reddeer/releases/latest";
 	
 	@BeforeClass
 	public static void setupList() {
