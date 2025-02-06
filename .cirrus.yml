@@ -53,7 +53,6 @@ eks_builder_container: &BUILDER_CONTAINER_DEFINITION
 # ZIP archive so that we can access it from outside Cirrus CI and for it to be later linked with
 # the GitHub promotion.
 build_task:
-  name: "Build p2 repository and upload artifact"
   <<: *ONLY_IF
   eks_container:
     <<: *BUILDER_CONTAINER_DEFINITION
@@ -81,7 +80,6 @@ build_task:
 # tests as it was also the case in the official Eclipse project. Afterwards uploading the recording
 # and its log as well as the jUnit artifacts.
 qa_taks:
-  name: "Run unit tests and SWTBot/RedDeer integration tests"
   <<: *ONLY_IF
   eks_container:
     <<: *BUILDER_CONTAINER_DEFINITION
@@ -129,7 +127,6 @@ qa_taks:
 # After the build was successful we promote the build on GitHub and link the P2 Repository ZIP
 # archive for a fast download. There is no Dogfooding Eclipse Update Site.
 promote_task:
-  name: "Promote build on GitHub and link P2 Repository"
   depends_on:
     - build
     - qa
