@@ -57,7 +57,7 @@ build_task:
   eks_container:
     <<: *BUILDER_CONTAINER_DEFINITION
     cpu: 4
-    memory: 8G
+    memory: 4G
     type: m6a.large
   build_script: |
     source cirrus-env BUILD
@@ -87,7 +87,7 @@ qa_task:
   eks_container:
     <<: *BUILDER_CONTAINER_DEFINITION
     cpu: 4
-    memory: 16G
+    memory: 8G
     type: m6a.large
   env:
     DISPLAY: :10
@@ -186,7 +186,7 @@ promote_task:
   eks_container:
     <<: *BUILDER_CONTAINER_DEFINITION
     cpu: 4
-    memory: 4G
+    memory: 2G
     type: m6a.large
   env:
     GITHUB_TOKEN: VAULT[development/github/token/${CIRRUS_REPO_OWNER}-${CIRRUS_REPO_NAME}-promotion token]
