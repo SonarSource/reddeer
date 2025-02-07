@@ -105,6 +105,7 @@ qa_task:
     - env:
         BUNDLE: "org.eclipse.reddeer.e4.workbench.test"
         PROFILE: "common-skipTests,core-skipTests,direct-skipTests,eclipse-skipTests,gef-skipTests,graphiti-skipTests,integration-skipTests,jface-skipTests,junit-skipTests,requirements-skipTests,swt-skipTests,ui-skipTests,uiforms-skipTests,workbench-skipTests"
+# This bundle won't be tested for now as it is taking way more than 1 hour to run completely.
 #    - env:
 #        BUNDLE: "org.eclipse.reddeer.eclipse.test"
 #        PROFILE: "common-skipTests,core-skipTests,direct-skipTests,e4.workbench-skipTests,gef-skipTests,graphiti-skipTests,integration-skipTests,jface-skipTests,junit-skipTests,requirements-skipTests,swt-skipTests,ui-skipTests,uiforms-skipTests,workbench-skipTests"
