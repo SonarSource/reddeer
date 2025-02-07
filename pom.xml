@@ -273,7 +273,7 @@
 			activated on build task of the Cirrus CI pipeline.
 		-->
 		<profile>
-			<id>build-archetype<id>
+			<id>build-archetype</id>
 			<modules>
 				<module>archetype</module>
 			</modules>
