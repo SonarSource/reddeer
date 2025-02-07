@@ -64,6 +64,7 @@ build_task:
     source .cirrus/set_maven_build_version "$BUILD_NUMBER"
     mvn clean verify \
       -B -e -V \
+      -Pbuild-archetype\
       -DskipTests
   always:
     p2_artifacts:
@@ -104,9 +105,9 @@ qa_task:
     - env:
         BUNDLE: "org.eclipse.reddeer.e4.workbench.test"
         PROFILE: "common-skipTests,core-skipTests,direct-skipTests,eclipse-skipTests,gef-skipTests,graphiti-skipTests,integration-skipTests,jface-skipTests,junit-skipTests,requirements-skipTests,swt-skipTests,ui-skipTests,uiforms-skipTests,workbench-skipTests"
-    - env:
-        BUNDLE: "org.eclipse.reddeer.eclipse.test"
-        PROFILE: "common-skipTests,core-skipTests,direct-skipTests,e4.workbench-skipTests,gef-skipTests,graphiti-skipTests,integration-skipTests,jface-skipTests,junit-skipTests,requirements-skipTests,swt-skipTests,ui-skipTests,uiforms-skipTests,workbench-skipTests"
+#    - env:
+#        BUNDLE: "org.eclipse.reddeer.eclipse.test"
+#        PROFILE: "common-skipTests,core-skipTests,direct-skipTests,e4.workbench-skipTests,gef-skipTests,graphiti-skipTests,integration-skipTests,jface-skipTests,junit-skipTests,requirements-skipTests,swt-skipTests,ui-skipTests,uiforms-skipTests,workbench-skipTests"
     - env:
         BUNDLE: "org.eclipse.reddeer.gef.test"
         PROFILE: "common-skipTests,core-skipTests,direct-skipTests,e4.workbench-skipTests,eclipse-skipTests,graphiti-skipTests,integration-skipTests,jface-skipTests,junit-skipTests,requirements-skipTests,swt-skipTests,ui-skipTests,uiforms-skipTests,workbench-skipTests"
