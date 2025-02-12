@@ -116,9 +116,14 @@ qa_task:
     - env:
         BUNDLE: "org.eclipse.reddeer.graphiti.test"
         PROFILE: "graphiti-tests"
-    - env:
-        BUNDLE: "org.eclipse.reddeer.integration.test"
-        PROFILE: "integration-tests"
+
+# This bundle won't be tested for now as it requires an existing Eclipse Update Site for the
+# installation process. The Eclipse Update Site does not exist (yet) as a hosted P2 repository by
+# Sonar and can only be used and this tests enabled when the first release of this fork is done!
+#    - env:
+#        BUNDLE: "org.eclipse.reddeer.integration.test"
+#        PROFILE: "integration-tests"
+
     - env:
         BUNDLE: "org.eclipse.reddeer.jface.test"
         PROFILE: "jface-tests"
