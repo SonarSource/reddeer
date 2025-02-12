@@ -62,9 +62,9 @@
 		</profile>
 
 		<profile>
-			<id>workbench-skipTests</id>
+			<id>workbench-tests</id>
 			<properties>
-				<skipTests>true</skipTests>
+				<skipTests>false</skipTests>
 			</properties>
 		</profile>
 	</profiles>

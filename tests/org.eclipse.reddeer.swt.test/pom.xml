@@ -62,9 +62,9 @@
 		</profile>
 
 		<profile>
-			<id>swt-skipTests</id>
+			<id>swt-tests</id>
 			<properties>
-				<skipTests>true</skipTests>
+				<skipTests>false</skipTests>
 			</properties>
 		</profile>
 	</profiles>

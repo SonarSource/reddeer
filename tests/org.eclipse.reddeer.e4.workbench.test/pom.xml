@@ -40,9 +40,9 @@
 
 	<profiles>
 		<profile>
-			<id>e4.workbench-skipTests</id>
+			<id>e4.workbench-tests</id>
 			<properties>
-				<skipTests>true</skipTests>
+				<skipTests>false</skipTests>
 			</properties>
 		</profile>
 	</profiles>

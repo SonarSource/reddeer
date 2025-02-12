@@ -60,9 +60,9 @@
 
 	<profiles>
 		<profile>
-			<id>junit-skipTests</id>
+			<id>junit-tests</id>
 			<properties>
-				<skipTests>true</skipTests>
+				<skipTests>false</skipTests>
 			</properties>
 		</profile>
 	</profiles>

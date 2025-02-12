@@ -64,8 +64,7 @@ build_task:
     source .cirrus/set_maven_build_version "$BUILD_NUMBER"
     mvn clean verify \
       -B -e -V \
-      -Pbuild-archetype\
-      -DskipTests
+      -Pbuild-archetype
   always:
     p2_artifacts:
       paths: site/target/org.eclipse.reddeer.site-*.zip
@@ -95,50 +94,52 @@ qa_task:
   matrix:
     - env:
         BUNDLE: "org.eclipse.reddeer.common.test"
-        PROFILE: "core-skipTests,direct-skipTests,e4.workbench-skipTests,eclipse-skipTests,gef-skipTests,graphiti-skipTests,integration-skipTests,jface-skipTests,junit-skipTests,requirements-skipTests,swt-skipTests,ui-skipTests,uiforms-skipTests,workbench-skipTests"
+        PROFILE: "common-tests"
     - env:
         BUNDLE: "org.eclipse.reddeer.core.test"
-        PROFILE: "common-skipTests,direct-skipTests,e4.workbench-skipTests,eclipse-skipTests,gef-skipTests,graphiti-skipTests,integration-skipTests,jface-skipTests,junit-skipTests,requirements-skipTests,swt-skipTests,ui-skipTests,uiforms-skipTests,workbench-skipTests"
+        PROFILE: "core-tests"
     - env:
         BUNDLE: "org.eclipse.reddeer.direct.test"
-        PROFILE: "common-skipTests,core-skipTests,e4.workbench-skipTests,eclipse-skipTests,gef-skipTests,graphiti-skipTests,integration-skipTests,jface-skipTests,junit-skipTests,requirements-skipTests,swt-skipTests,ui-skipTests,uiforms-skipTests,workbench-skipTests"
+        PROFILE: "direct-tests"
     - env:
         BUNDLE: "org.eclipse.reddeer.e4.workbench.test"
-        PROFILE: "common-skipTests,core-skipTests,direct-skipTests,eclipse-skipTests,gef-skipTests,graphiti-skipTests,integration-skipTests,jface-skipTests,junit-skipTests,requirements-skipTests,swt-skipTests,ui-skipTests,uiforms-skipTests,workbench-skipTests"
+        PROFILE: "e4.workbench-tests"
+
 # This bundle won't be tested for now as it is taking way more than 1 hour to run completely.
 #    - env:
 #        BUNDLE: "org.eclipse.reddeer.eclipse.test"
-#        PROFILE: "common-skipTests,core-skipTests,direct-skipTests,e4.workbench-skipTests,gef-skipTests,graphiti-skipTests,integration-skipTests,jface-skipTests,junit-skipTests,requirements-skipTests,swt-skipTests,ui-skipTests,uiforms-skipTests,workbench-skipTests"
+#        PROFILE: "eclipse-tests"
+
     - env:
         BUNDLE: "org.eclipse.reddeer.gef.test"
-        PROFILE: "common-skipTests,core-skipTests,direct-skipTests,e4.workbench-skipTests,eclipse-skipTests,graphiti-skipTests,integration-skipTests,jface-skipTests,junit-skipTests,requirements-skipTests,swt-skipTests,ui-skipTests,uiforms-skipTests,workbench-skipTests"
+        PROFILE: "gef-tests"
     - env:
         BUNDLE: "org.eclipse.reddeer.graphiti.test"
-        PROFILE: "common-skipTests,core-skipTests,direct-skipTests,e4.workbench-skipTests,eclipse-skipTests,gef-skipTests,integration-skipTests,jface-skipTests,junit-skipTests,requirements-skipTests,swt-skipTests,ui-skipTests,uiforms-skipTests,workbench-skipTests"
+        PROFILE: "graphiti-tests"
     - env:
         BUNDLE: "org.eclipse.reddeer.integration.test"
-        PROFILE: "common-skipTests,core-skipTests,direct-skipTests,e4.workbench-skipTests,eclipse-skipTests,gef-skipTests,graphiti-skipTests,jface-skipTests,junit-skipTests,requirements-skipTests,swt-skipTests,ui-skipTests,uiforms-skipTests,workbench-skipTests"
+        PROFILE: "integration-tests"
     - env:
         BUNDLE: "org.eclipse.reddeer.jface.test"
-        PROFILE: "common-skipTests,core-skipTests,direct-skipTests,e4.workbench-skipTests,eclipse-skipTests,gef-skipTests,graphiti-skipTests,integration-skipTests,junit-skipTests,requirements-skipTests,swt-skipTests,ui-skipTests,uiforms-skipTests,workbench-skipTests"
+        PROFILE: "jface-tests"
     - env:
         BUNDLE: "org.eclipse.reddeer.junit.test"
-        PROFILE: "common-skipTests,core-skipTests,direct-skipTests,e4.workbench-skipTests,eclipse-skipTests,gef-skipTests,graphiti-skipTests,integration-skipTests,jface-skipTests,requirements-skipTests,swt-skipTests,ui-skipTests,uiforms-skipTests,workbench-skipTests"
+        PROFILE: "junit-tests"
     - env:
         BUNDLE: "org.eclipse.reddeer.requirements.test"
-        PROFILE: "common-skipTests,core-skipTests,direct-skipTests,e4.workbench-skipTests,eclipse-skipTests,gef-skipTests,graphiti-skipTests,integration-skipTests,jface-skipTests,junit-skipTests,swt-skipTests,ui-skipTests,uiforms-skipTests,workbench-skipTests"
+        PROFILE: "requirements-tests"
     - env:
         BUNDLE: "org.eclipse.reddeer.swt.test"
-        PROFILE: "common-skipTests,core-skipTests,direct-skipTests,e4.workbench-skipTests,eclipse-skipTests,gef-skipTests,graphiti-skipTests,integration-skipTests,jface-skipTests,junit-skipTests,requirements-skipTests,ui-skipTests,uiforms-skipTests,workbench-skipTests"
+        PROFILE: "swt-tests"
     - env:
         BUNDLE: "org.eclipse.reddeer.ui.test"
-        PROFILE: "common-skipTests,core-skipTests,direct-skipTests,e4.workbench-skipTests,eclipse-skipTests,gef-skipTests,graphiti-skipTests,integration-skipTests,jface-skipTests,junit-skipTests,requirements-skipTests,swt-skipTests,uiforms-skipTests,workbench-skipTests"
+        PROFILE: "ui-tests"
     - env:
         BUNDLE: "org.eclipse.reddeer.uiforms.test"
-        PROFILE: "common-skipTests,core-skipTests,direct-skipTests,e4.workbench-skipTests,eclipse-skipTests,gef-skipTests,graphiti-skipTests,integration-skipTests,jface-skipTests,junit-skipTests,requirements-skipTests,swt-skipTests,ui-skipTests,workbench-skipTests"
+        PROFILE: "uiforms-tests"
     - env:
         BUNDLE: "org.eclipse.reddeer.workbench.test"
-        PROFILE: "common-skipTests,core-skipTests,direct-skipTests,e4.workbench-skipTests,eclipse-skipTests,gef-skipTests,graphiti-skipTests,integration-skipTests,jface-skipTests,junit-skipTests,requirements-skipTests,swt-skipTests,ui-skipTests,uiforms-skipTests"
+        PROFILE: "workbench-tests"
   pre_recording_background_script: |
     set -euo pipefail
     /etc/init.d/xvfb start

@@ -174,9 +174,9 @@
 		</profile>
 
 		<profile>
-			<id>eclipse-skipTests</id>
+			<id>eclipse-tests</id>
 			<properties>
-				<skipTests>true</skipTests>
+				<skipTests>false</skipTests>
 			</properties>
 		</profile>
 	</profiles>

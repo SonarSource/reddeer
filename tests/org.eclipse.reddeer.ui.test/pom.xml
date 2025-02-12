@@ -62,9 +62,9 @@
 		</profile>
 
 		<profile>
-			<id>ui-skipTests</id>
+			<id>ui-tests</id>
 			<properties>
-				<skipTests>true</skipTests>
+				<skipTests>false</skipTests>
 			</properties>
 		</profile>
 	</profiles>

@@ -62,9 +62,9 @@
 		</profile>
 
 		<profile>
-			<id>jface-skipTests</id>
+			<id>jface-tests</id>
 			<properties>
-				<skipTests>true</skipTests>
+				<skipTests>false</skipTests>
 			</properties>
 		</profile>
 	</profiles>

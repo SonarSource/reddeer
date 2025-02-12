@@ -55,9 +55,9 @@
 
 	<profiles>
 		<profile>
-			<id>graphiti-skipTests</id>
+			<id>graphiti-tests</id>
 			<properties>
-				<skipTests>true</skipTests>
+				<skipTests>false</skipTests>
 			</properties>
 		</profile>
 	</profiles>

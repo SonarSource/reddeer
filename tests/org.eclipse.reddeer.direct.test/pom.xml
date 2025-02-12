@@ -62,9 +62,9 @@
 		</profile>
 
 		<profile>
-			<id>direct-skipTests</id>
+			<id>direct-tests</id>
 			<properties>
-				<skipTests>true</skipTests>
+				<skipTests>false</skipTests>
 			</properties>
 		</profile>
 	</profiles>

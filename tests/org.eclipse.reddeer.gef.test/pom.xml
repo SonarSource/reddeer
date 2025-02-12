@@ -63,9 +63,9 @@
 
 	<profiles>
 		<profile>
-			<id>gef-skipTests</id>
+			<id>gef-tests</id>
 			<properties>
-				<skipTests>true</skipTests>
+				<skipTests>false</skipTests>
 			</properties>
 		</profile>
 	</profiles>

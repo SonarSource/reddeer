@@ -35,9 +35,9 @@
 
 	<profiles>
 		<profile>
-			<id>common-skipTests</id>
+			<id>common-tests</id>
 			<properties>
-				<skipTests>true</skipTests>
+				<skipTests>false</skipTests>
 			</properties>
 		</profile>
 	</profiles>
