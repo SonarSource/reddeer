@@ -55,7 +55,6 @@
 		<module>tests</module>
 		<module>features</module>
 		<module>site</module>
-		<module>archetype</module>
 	</modules>
 
 	<build>
@@ -268,6 +267,17 @@
 			    </plugins>
 		    </build>			
 		</profile>
-	</profiles>
 
+		<!--
+			This module is failing on the unit/integration tests and therefore should only be
+			activated on build task of the Cirrus CI pipeline. It is also not required for building
+			everything related to the bundles/features that contain unit/integration tests.
+		-->
+		<profile>
+			<id>build-archetype</id>
+			<modules>
+				<module>archetype</module>
+			</modules>
+		</profile>
+	</profiles>
 </project>

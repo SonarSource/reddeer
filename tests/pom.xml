@@ -34,6 +34,12 @@
 		<pauseFailedTest>false</pauseFailedTest>
 		<relativeScreenshotDirectory>.${file.separator}target${file.separator}screenshots</relativeScreenshotDirectory>
 		<surefire.timeout>2400</surefire.timeout>
+
+		<!--
+			By default we disable all the unit/integration tests and only enable them one by one in
+			the specific test bundle. This way the configuration on the CI isn't that complicated.
+		-->
+		<skipTests>true</skipTests>
 	</properties>
 
 	<modules>

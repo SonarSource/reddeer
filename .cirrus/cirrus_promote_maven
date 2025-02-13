@@ -1,0 +1,21 @@
+#!/bin/bash
+# shellcheck source=/dev/null
+
+# We promote the GitHub build by providing the path to the P2 Repository ZIP archived that is saved
+# as a build artifact on Cirrus CI.
+
+set -euo pipefail
+
+source cirrus-env PROMOTE
+source .cirrus/set_maven_build_version "$BUILD_NUMBER"
+
+if [[ ! -v GITHUB_TOKEN ]]; then
+    echo "GITHUB_TOKEN is not set"
+else
+    # This is the "p2_artifacts" artifact of the "build_task" step in the pipeline!
+    P2_URL="https://api.cirrus-ci.com/v1/artifact/build/$CIRRUS_BUILD_ID/build/p2/site/target/org.eclipse.reddeer.site-$PROJECT_VERSION.zip"
+    curl -X POST \
+      -H "Authorization: token $GITHUB_TOKEN" \
+      -H 'Content-Type: application/json' --data '{"state": "success", "target_url": "'"${P2_URL}"'", "description": "Latest promoted build: '"${PROJECT_VERSION}"'", "context": "repox"}' \
+      https://api.github.com/repos/"${GITHUB_REPO}"/statuses/"${GIT_SHA1}"
+fi

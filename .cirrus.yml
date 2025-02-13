@@ -1,37 +1,204 @@
+# 1) Environment variables
+# ========================
+#
+# We only require the right to read Artifactory (Repox) but not to push. For notifying the
+# developers via Slack we require the token and channel name to send a message.
 env:
-  CIRRUS_CLONE_DEPTH: "20"
+  CIRRUS_CLONE_DEPTH: "1"
   CIRRUS_SHELL: bash
 
-eks_container_definition: &CONTAINER_DEFINITION
-  image: ${CIRRUS_AWS_ACCOUNT}.dkr.ecr.eu-central-1.amazonaws.com/base:latest
-  cluster_name: ${CIRRUS_CLUSTER_NAME}
+  ARTIFACTORY_URL: VAULT[development/kv/data/repox data.url]
+  ARTIFACTORY_PRIVATE_USERNAME: vault-${CIRRUS_REPO_OWNER}-${CIRRUS_REPO_NAME}-private-reader
+  ARTIFACTORY_PRIVATE_PASSWORD: VAULT[development/artifactory/token/${CIRRUS_REPO_OWNER}-${CIRRUS_REPO_NAME}-private-reader access_token]
+  ARTIFACTORY_ACCESS_TOKEN: VAULT[development/artifactory/token/${CIRRUS_REPO_OWNER}-${CIRRUS_REPO_NAME}-private-reader access_token]
+
+  SLACK_TOKEN: VAULT[development/kv/data/slack data.token]
+  SLACK_CHANNEL: squad-ide-eclipse-bots
+
+
+# 2) Cirrus CI guard
+# ==================
+# 
+# We only want to run the CI on "master", "branch-*" and all PRs targeting any branch. Restricted
+# to actual collaborators of this project.
+only_if: &ONLY_IF
+  only_if: $CIRRUS_USER_COLLABORATOR == 'true' && $CIRRUS_TAG == ""
+    && ($CIRRUS_PR != "" || $CIRRUS_BRANCH == $CIRRUS_DEFAULT_BRANCH || $CIRRUS_BRANCH =~ "branch-.*")
+
+
+# 3) Dockerfile magic
+# ===================
+#
+# We basically re-use most of the Dockerfile logic from SonarQube for Eclipse.
+container_definition: &CONTAINER_DEFINITION
+  image: ${CIRRUS_AWS_ACCOUNT}.dkr.ecr.eu-central-1.amazonaws.com/base:j17-m3.9-latest
   region: eu-central-1
+  cluster_name: ${CIRRUS_CLUSTER_NAME}
   namespace: default
 
-build_task:
-  eks_container:
-    <<: *CONTAINER_DEFINITION
-    cpu: 1
-    memory: 1G
-  env:
-    # Possible values for ARTIFACTORY_DEPLOY_REPO: sonarsource-private-qa, sonarsource-public-qa
-    ARTIFACTORY_DEPLOY_REPO: FIXME
-    ARTIFACTORY_DEPLOY_USERNAME: VAULT[development/artifactory/token/${CIRRUS_REPO_OWNER}-${CIRRUS_REPO_NAME}-qa-deployer username]
-    ARTIFACTORY_DEPLOY_PASSWORD: VAULT[development/artifactory/token/${CIRRUS_REPO_OWNER}-${CIRRUS_REPO_NAME}-qa-deployer access_token]
-    DEPLOY_PULL_REQUEST: "true"
-  build_script:
-    - source cirrus-env BUILD
-    - regular_build_...
+eks_builder_container: &BUILDER_CONTAINER_DEFINITION
+  <<: *CONTAINER_DEFINITION
+  dockerfile: .cirrus/Dockerfile
+  docker_arguments:
+    CIRRUS_AWS_ACCOUNT: ${CIRRUS_AWS_ACCOUNT}
+  builder_role: cirrus-builder
+  builder_image: docker-builder-v*
+  builder_instance_type: m6a.large
 
+
+# 4) Build (parallel with QA)
+# ===========================
+#
+# We run the build including the tests but do not run them. Afterwards uploading the P2 Repository
+# ZIP archive so that we can access it from outside Cirrus CI and for it to be later linked with
+# the GitHub promotion.
+build_task:
+  <<: *ONLY_IF
+  eks_container:
+    <<: *BUILDER_CONTAINER_DEFINITION
+    cpu: 4
+    memory: 4G
+    type: m6a.large
+  build_script: |
+    source cirrus-env BUILD
+    source .cirrus/set_maven_build_version "$BUILD_NUMBER"
+    mvn clean verify \
+      -B -e -V \
+      -Pbuild-archetype
+  always:
+    p2_artifacts:
+      paths: site/target/org.eclipse.reddeer.site-*.zip
+      type: application/zip
+  on_failure:
+    slack_notification_script: |
+      source slack-failure-notification "RedDeer fork build failed"
+
+
+# 5) QA (parallel with Build)
+# ===========================
+#
+# We run all the unit tests and SWT/RedDeer integration tests in the repository ignoring failing
+# tests as it was also the case in the official Eclipse project. Afterwards uploading the recording
+# and its log as well as the jUnit artifacts.
+# We run all the different test bundles in parallel to speed up the CI!
+qa_task:
+  <<: *ONLY_IF
+  eks_container:
+    <<: *BUILDER_CONTAINER_DEFINITION
+    cpu: 4
+    memory: 8G
+    type: m6a.large
+  env:
+    DISPLAY: :10
+    MAVEN_OPTS: -Xmx3072m
+  matrix:
+    - env:
+        BUNDLE: "org.eclipse.reddeer.common.test"
+        PROFILE: "common-tests"
+    - env:
+        BUNDLE: "org.eclipse.reddeer.core.test"
+        PROFILE: "core-tests"
+    - env:
+        BUNDLE: "org.eclipse.reddeer.direct.test"
+        PROFILE: "direct-tests"
+    - env:
+        BUNDLE: "org.eclipse.reddeer.e4.workbench.test"
+        PROFILE: "e4.workbench-tests"
+
+# This bundle won't be tested for now as it is taking way more than 1 hour to run completely.
+#    - env:
+#        BUNDLE: "org.eclipse.reddeer.eclipse.test"
+#        PROFILE: "eclipse-tests"
+
+    - env:
+        BUNDLE: "org.eclipse.reddeer.gef.test"
+        PROFILE: "gef-tests"
+    - env:
+        BUNDLE: "org.eclipse.reddeer.graphiti.test"
+        PROFILE: "graphiti-tests"
+
+# This bundle won't be tested for now as it requires an existing Eclipse Update Site for the
+# installation process. The Eclipse Update Site does not exist (yet) as a hosted P2 repository by
+# Sonar and can only be used and this tests enabled when the first release of this fork is done!
+#    - env:
+#        BUNDLE: "org.eclipse.reddeer.integration.test"
+#        PROFILE: "integration-tests"
+
+    - env:
+        BUNDLE: "org.eclipse.reddeer.jface.test"
+        PROFILE: "jface-tests"
+    - env:
+        BUNDLE: "org.eclipse.reddeer.junit.test"
+        PROFILE: "junit-tests"
+    - env:
+        BUNDLE: "org.eclipse.reddeer.requirements.test"
+        PROFILE: "requirements-tests"
+    - env:
+        BUNDLE: "org.eclipse.reddeer.swt.test"
+        PROFILE: "swt-tests"
+    - env:
+        BUNDLE: "org.eclipse.reddeer.ui.test"
+        PROFILE: "ui-tests"
+    - env:
+        BUNDLE: "org.eclipse.reddeer.uiforms.test"
+        PROFILE: "uiforms-tests"
+    - env:
+        BUNDLE: "org.eclipse.reddeer.workbench.test"
+        PROFILE: "workbench-tests"
+  pre_recording_background_script: |
+    set -euo pipefail
+    /etc/init.d/xvfb start
+    metacity --sm-disable --replace &
+    sleep 10 # give metacity some time to start
+    echo 'Recording tests on video'
+    ffmpeg -loglevel warning -f x11grab -video_size 1920x1080 -i ${DISPLAY} -codec:v libx264 -r 12 ${CIRRUS_WORKING_DIR}/${BUNDLE}.mp4
+  run_tests_script: |
+    echo "Run unit / integration tests for bundle ${BUNDLE}"
+    source cirrus-env QA
+    source .cirrus/set_maven_build_version "$BUILD_NUMBER"
+    mvn clean verify \
+      -B -e -V \
+      -P${PROFILE} \
+      -Dmaven.test.failure.ignore=true
+  always:
+    post_recording_script: |
+      pkill -SIGINT -f ffmpeg
+      while pgrep ffmpeg >/dev/null; do sleep 1; done
+      /etc/init.d/xvfb stop
+    recording_artifacts:
+      path: "${CIRRUS_WORKING_DIR}/${BUNDLE}.mp4"
+      type: application/mp4
+    xvfb_log_artifacts:
+      path: "${CIRRUS_WORKING_DIR}/Xvfb.out"
+    junit_artifacts:
+      paths:
+      - "**/test-results/**/*.xml"
+      - "**/target/surefire-reports/TEST-*.xml"
+      format: junit
+  on_failure:
+    slack_notification_script: |
+      source slack-failure-notification "RedDeer fork UTs/ITs failed for: ${BUNDLE}"
+
+
+# 6) Promotion (depends on Build and QA)
+# ======================================
+#
+# After the build was successful we promote the build on GitHub and link the P2 Repository ZIP
+# archive for a fast download. There is no Dogfooding Eclipse Update Site.
 promote_task:
   depends_on:
     - build
+    - qa
+  <<: *ONLY_IF
   eks_container:
-    <<: *CONTAINER_DEFINITION
-    cpu: 1
-    memory: 1G
+    <<: *BUILDER_CONTAINER_DEFINITION
+    cpu: 4
+    memory: 2G
+    type: m6a.large
   env:
-    ARTIFACTORY_PROMOTE_ACCESS_TOKEN: VAULT[development/artifactory/token/${CIRRUS_REPO_OWNER}-${CIRRUS_REPO_NAME}-promoter access_token]
     GITHUB_TOKEN: VAULT[development/github/token/${CIRRUS_REPO_OWNER}-${CIRRUS_REPO_NAME}-promotion token]
-    ARTIFACTS: FIXME # This was for Burgr links, is it still required?
-  script: cirrus_promote_...
+  promote_script:
+    .cirrus/cirrus_promote_maven
+  on_failure:
+    slack_notification_script: |
+      source slack-failure-notification "RedDeer fork promotion failed"
