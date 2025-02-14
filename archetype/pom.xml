@@ -58,6 +58,12 @@
 	
 	<properties>
 		<tycho-version>2.7.5</tycho-version>
+
+		<!--
+			As Maven / Eclipse Tycho archetype is running some magic "integration-test" goal, this
+			has to be configured here specifically as this projects has no parent configuration.
+		-->
+		<skipTests>true</skipTests>
 	</properties>
 
 	<build>

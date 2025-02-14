@@ -53,4 +53,12 @@
 		</plugins>
 	</build>
 
+	<profiles>
+		<profile>
+			<id>graphiti-tests</id>
+			<properties>
+				<skipTests>false</skipTests>
+			</properties>
+		</profile>
+	</profiles>
 </project>
