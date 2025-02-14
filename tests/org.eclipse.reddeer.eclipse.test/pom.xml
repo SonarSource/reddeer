@@ -172,6 +172,13 @@
 				</plugins>
 			</build>
 		</profile>
+
+		<profile>
+			<id>eclipse-tests</id>
+			<properties>
+				<skipTests>false</skipTests>
+			</properties>
+		</profile>
 	</profiles>
 	
 	<repositories>
