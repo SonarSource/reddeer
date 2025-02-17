@@ -27,8 +27,16 @@ the [Releasability GitHub Action](https://github.com/SonarSource/gh-action_relea
 
 4. Reach out to the **Platform Engineering Experience** squad via
    [Slack](https://sonarsource.enterprise.slack.com/archives/C04CVEU7734) for them to upload the
-   release to SonarSource Binaries.
+   release to *SonarSource Binaries*.
 
 5. Bump the version of the Maven/Tycho build:
 
 > mvn org.eclipse.tycho:tycho-versions-plugin:set-version -Dtycho.mode=maven -DnewVersion={new version}
+
+### Semi-automatic release script
+
+The script **release.sh** can be invoked from the command line. It requires the AWS CLI to be
+configured to be able to push to *SonarSource Binaries* and the following 2 variables to be set:
+
+- **CIRRUS_BUILD_ID**: This is the id of the build to download the ZIP archive / build artifact
+- **RELEASE_VERSION**: This is the version of the build and the version/tag of the GitHub release
