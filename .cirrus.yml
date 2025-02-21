@@ -69,7 +69,7 @@ build_task:
     source .cirrus/set_maven_build_version "$BUILD_NUMBER"
     mvn clean deploy \
       -B -e -V \
-      -Pbuild-archetype
+      -Pbuild-archetype,deploy-sonarsource
   always:
     p2_artifacts:
       paths: site/target/org.eclipse.reddeer.site-*.zip
