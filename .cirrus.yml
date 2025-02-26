@@ -67,9 +67,14 @@ build_task:
   build_script: |
     source cirrus-env BUILD
     source .cirrus/set_maven_build_version "$BUILD_NUMBER"
-    mvn clean deploy \
+    mvn clean verify \
       -B -e -V \
-      -Pbuild-archetype,deploy-sonarsource
+      -Pbuild-archetype
+    
+    mvn deploy:deploy-file -Durl=$ARTIFACTORY_URL \
+      -DrepositoryId=$ARTIFACTORY_DEPLOY_REPO \
+      -Dfile=site/target/org.eclipse.reddeer.site-$PROJECT_VERSION.zip
+      -DpomFile=site/pom.xml
   always:
     p2_artifacts:
       paths: site/target/org.eclipse.reddeer.site-*.zip
