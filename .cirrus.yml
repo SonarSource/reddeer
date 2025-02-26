@@ -65,7 +65,7 @@ build_task:
     ARTIFACTORY_DEPLOY_PASSWORD: VAULT[development/artifactory/token/${CIRRUS_REPO_OWNER}-${CIRRUS_REPO_NAME}-qa-deployer access_token]
     DEPLOY_PULL_REQUEST: true
   build_script: |
-    source cirrus-env BUILD
+    source cirrus-env BUILD-PRIVATE
     source .cirrus/set_maven_build_version "$BUILD_NUMBER"
     mvn clean verify \
       -B -e -V \
