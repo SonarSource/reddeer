@@ -73,8 +73,10 @@ build_task:
     
     mvn deploy:deploy-file -Durl=$ARTIFACTORY_URL \
       -DrepositoryId=$ARTIFACTORY_DEPLOY_REPO \
-      -Dfile=site/target/org.eclipse.reddeer.site-$PROJECT_VERSION.zip
-      -DpomFile=site/pom.xml
+      -Dfile=site/target/org.eclipse.reddeer.site-$PROJECT_VERSION.zip \
+      -DgroupId=org.eclipse.reddeer \
+      -DartifactId=org.eclipse.reddeer.site \
+      -Dversion=$PROJECT_VERSION
   always:
     p2_artifacts:
       paths: site/target/org.eclipse.reddeer.site-*.zip
