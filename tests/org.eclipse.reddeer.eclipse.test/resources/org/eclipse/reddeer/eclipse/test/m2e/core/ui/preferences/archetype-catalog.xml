@@ -16,7 +16,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <archetypes>
     <archetype>
-      <groupId>org.eclipse.reddeer</groupId>
+      <groupId>org.sonarsource.eclipse.reddeer</groupId>
       <artifactId>jboss-reddeer-archetype</artifactId>
       <version>1.1.0-SNAPSHOT</version>
       <description>RedDeer Archetype</description>
