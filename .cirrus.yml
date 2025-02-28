@@ -65,7 +65,7 @@ build_task:
     ARTIFACTORY_DEPLOY_PASSWORD: VAULT[development/artifactory/token/${CIRRUS_REPO_OWNER}-${CIRRUS_REPO_NAME}-qa-deployer access_token]
     DEPLOY_PULL_REQUEST: true
   build_script: |
-    source cirrus-env BUILD-PRIVATE
+    source cirrus-env BUILD
     source .cirrus/set_maven_build_version "$BUILD_NUMBER"
     mvn clean deploy \
       -B -e -V \
@@ -201,6 +201,7 @@ promote_task:
     memory: 2G
     type: m6a.large
   env:
+    ARTIFACTORY_DEPLOY_REPO: sonarsource-public-qa
     ARTIFACTORY_PROMOTE_ACCESS_TOKEN: VAULT[development/artifactory/token/${CIRRUS_REPO_OWNER}-${CIRRUS_REPO_NAME}-promoter access_token]
     GITHUB_TOKEN: VAULT[development/github/token/${CIRRUS_REPO_OWNER}-${CIRRUS_REPO_NAME}-promotion token]
   promote_script:
