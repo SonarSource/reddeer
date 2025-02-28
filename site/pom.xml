@@ -17,7 +17,7 @@
 	<name>RedDeer Site</name>
 	<packaging>eclipse-repository</packaging>
 	<parent>
-		<groupId>org.eclipse.reddeer</groupId>
+		<groupId>org.sonarsource.eclipse.reddeer</groupId>
 		<artifactId>parent</artifactId>
 		<version>4.7.0-SNAPSHOT</version>
 	</parent>
