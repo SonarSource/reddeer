@@ -47,6 +47,11 @@
 		<sonar.code.codeCoveragePlugin>jacoco</sonar.code.codeCoveragePlugin>
 		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
 		<sonar.jacoco.reportPaths>../../tests/org.eclipse.reddeer.common.test/target/jacoco.exec,../../tests/org.eclipse.reddeer.core.test/target/jacoco.exec,../../tests/org.eclipse.reddeer.direct.test/target/jacoco.exec,../../tests/org.eclipse.reddeer.eclipse.test/target/jacoco.exec,../../tests/org.eclipse.reddeer.gef.test/target/jacoco.exec,../../tests/org.eclipse.reddeer.graphiti.test/target/jacoco.exec,../../tests/org.eclipse.reddeer.jface.test/target/jacoco.exec,../../tests/org.eclipse.reddeer.junit.test/target/jacoco.exec,../../tests/org.eclipse.reddeer.requirements.test/target/jacoco.exec,../../tests/org.eclipse.reddeer.swt.test/target/jacoco.exec,../../tests/org.eclipse.reddeer.ui.test/target/jacoco.exec,../../tests/org.eclipse.reddeer.uiforms.test/target/jacoco.exec,../../tests/org.eclipse.reddeer.workbench.test/target/jacoco.exec,../../tests/org.eclipse.reddeer.e4.workbench.test/target/jacoco.exec</sonar.jacoco.reportPaths>
+
+		<!-- Plug-in used to deploy the build to Repox -->
+		<version.artifactory.plugin>3.5.1</version.artifactory.plugin>
+		<gitRepositoryName>reddeer</gitRepositoryName>
+		<artifactsToPublish>${project.groupId}:org.eclipse.reddeer.site:zip</artifactsToPublish>
 	</properties>
 
 	<modules>
@@ -278,6 +283,79 @@
 			<modules>
 				<module>archetype</module>
 			</modules>
+		</profile>
+
+		<!--
+			This is a shallow copy of the Artifactory Maven plug-in configuration of the Parent POM
+			(https://github.com/SonarSource/parent-oss) to be able to push to Repox (Artifactory)
+			as we cannot just add the parent POM for this project. It is kept very simple and all
+			the environment variables are coming from the Cirrus CI pipeline here.
+		-->
+		<profile>
+			<id>deploy-sonarsource</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.jfrog.buildinfo</groupId>
+						<artifactId>artifactory-maven-plugin</artifactId>
+						<version>${version.artifactory.plugin}</version>
+						<executions>
+							<execution>
+								<id>build-info</id>
+								<goals>
+									<goal>publish</goal>
+								</goals>
+								<configuration>
+									<artifactory>
+										<envVarsIncludePatterns>
+											GIT_SHA1,
+											GITHUB_BRANCH,
+											ARTIFACTS_TO_PUBLISH,
+											*_VERSION,
+											JAVA,
+											CIRRUS_CHANGE_MESSAGE,
+											PROJECT,
+											ARTIFACTORY_DEPLOY_REPO,
+											ARTIFACTORY_DEPLOY_USERNAME,
+											ARTIFACTORY_PRIVATE_USERNAME,
+											BUILD_NUMBER
+										</envVarsIncludePatterns>
+										<includeEnvVars>true</includeEnvVars>
+										<timeoutSec>60</timeoutSec>
+									</artifactory>
+									<deployProperties>
+										<vcs.revision>{{GIT_COMMIT}}</vcs.revision>
+										<vcs.branch>{{GIT_BRANCH}}</vcs.branch>
+										<build.name>${gitRepositoryName}</build.name>
+										<build.number>{{BUILD_NUMBER}}</build.number>
+									</deployProperties>
+									<licenses>
+										<autoDiscover>true</autoDiscover>
+										<includePublishedArtifacts>false</includePublishedArtifacts>
+										<runChecks>true</runChecks>
+										<scopes>project,provided</scopes>
+										<violationRecipients>licences-control@sonarsource.com</violationRecipients>
+									</licenses>
+									<publisher>
+										<contextUrl>{{ARTIFACTORY_URL}}</contextUrl>
+										<repoKey>{{ARTIFACTORY_DEPLOY_REPO}}</repoKey>
+										<username>{{ARTIFACTORY_DEPLOY_USERNAME}}</username>
+										<password>{{ARTIFACTORY_DEPLOY_PASSWORD}}</password>
+										<publishBuildInfo>true</publishBuildInfo>
+										<publishArtifacts>${artifactory.publish.artifacts}</publishArtifacts>
+									</publisher>
+									<buildInfo>
+										<buildName>${gitRepositoryName}</buildName>
+										<buildNumber>{{BUILD_NUMBER}}</buildNumber>
+										<buildUrl>{{BUILD_URL}}</buildUrl>
+										<vcsRevision>{{GIT_COMMIT}}</vcsRevision>
+									</buildInfo>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 	</profiles>
 </project>
