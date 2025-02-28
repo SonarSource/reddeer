@@ -67,16 +67,9 @@ build_task:
   build_script: |
     source cirrus-env BUILD-PRIVATE
     source .cirrus/set_maven_build_version "$BUILD_NUMBER"
-    mvn clean verify \
+    mvn clean deploy \
       -B -e -V \
       -Pbuild-archetype
-    
-    mvn deploy:deploy-file -Durl=$ARTIFACTORY_URL \
-      -DrepositoryId=$ARTIFACTORY_DEPLOY_REPO \
-      -Dfile=site/target/org.eclipse.reddeer.site-$PROJECT_VERSION.zip \
-      -DgroupId=org.eclipse.reddeer \
-      -DartifactId=org.eclipse.reddeer.site \
-      -Dversion=$PROJECT_VERSION
   always:
     p2_artifacts:
       paths: site/target/org.eclipse.reddeer.site-*.zip
