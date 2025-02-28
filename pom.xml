@@ -50,7 +50,7 @@
 
 		<!-- Plug-in used to deploy the build to Repox -->
 		<version.artifactory.plugin>3.5.1</version.artifactory.plugin>
-		<gitRepositoryName>sonarlint-eclipse</gitRepositoryName>
+		<gitRepositoryName>reddeer</gitRepositoryName>
 		<artifactsToPublish>${project.groupId}:org.eclipse.reddeer.site:zip</artifactsToPublish>
 	</properties>
 
