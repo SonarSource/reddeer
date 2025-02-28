@@ -68,7 +68,8 @@ build_task:
     source cirrus-env BUILD-PRIVATE
     source .cirrus/set_maven_build_version "$BUILD_NUMBER"
     mvn clean deploy \
-      -B -e -V
+      -B -e -V \
+      -Pdeploy-sonarsource
   always:
     p2_artifacts:
       paths: site/target/org.eclipse.reddeer.site-*.zip
