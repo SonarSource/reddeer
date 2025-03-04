@@ -52,6 +52,11 @@ Once built the Eclipse Update Site can be found inside the this folder structure
 **site/target/repository**. Get the path and use it in `Eclipse Help -> Install New Software...` to
 install the plug-in(s) inside the running application.
 
+## Releasing the fork
+
+To release the fork (no matter if it is on `master` for `4.7.x` or `branch-4.2.0` for `4.2.y`) see
+the dedicated [Release Process Documentation](RELEASE.md).
+
 ## Local development environment
 
 Sadly Eclipse RedDeer does not provide a

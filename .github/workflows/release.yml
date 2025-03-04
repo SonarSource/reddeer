@@ -1,12 +1,10 @@
----
 name: Release
 on:
   release:
     types:
       - published
 
-env:
-  PYTHONUNBUFFERED: 1
+# TODO: Replace this with the final version of the GitHub Release Action that include the necessary changes!
 
 jobs:
   release:
@@ -14,3 +12,6 @@ jobs:
       id-token: write
       contents: write
     uses: SonarSource/gh-action_release/.github/workflows/main.yaml@34d8b20d125bfd58d124e84b007d3a18e61c358a # 5.10.4
+    with:
+      publishToBinaries: true
+      slackChannel: squad-ide-eclipse
