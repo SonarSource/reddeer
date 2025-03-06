@@ -4,15 +4,16 @@ on:
     types:
       - published
 
-# TODO: Replace this with the final version of the GitHub Release Action that include the necessary changes!
+# TODO: Replace the action with the released version and remove the `dryRun` option
 
 jobs:
   release:
     permissions:
       id-token: write
       contents: write
-    uses: SonarSource/gh-action_release/.github/workflows/main.yaml@34d8b20d125bfd58d124e84b007d3a18e61c358a # 5.10.4
+    uses: SonarSource/gh-action_release/.github/workflows/main.yaml@85404e53633341038269d1757142cebfd0341df0
     with:
       publishToBinaries: true
       skipPythonReleasabilityChecks: true
       slackChannel: squad-ide-eclipse
+      dryRun: true
