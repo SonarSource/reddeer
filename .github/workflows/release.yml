@@ -11,7 +11,7 @@ jobs:
     permissions:
       id-token: write
       contents: write
-    uses: SonarSource/gh-action_release/.github/workflows/main.yaml@85404e53633341038269d1757142cebfd0341df0
+    uses: SonarSource/gh-action_release/.github/workflows/main.yaml@task/tha/SLE-1057_DryRun
     with:
       publishToBinaries: true
       skipPythonReleasabilityChecks: true
