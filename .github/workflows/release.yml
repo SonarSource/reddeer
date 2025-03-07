@@ -16,4 +16,3 @@ jobs:
       publishToBinaries: true
       skipPythonReleasabilityChecks: true
       slackChannel: squad-ide-eclipse
-      dryRun: true
