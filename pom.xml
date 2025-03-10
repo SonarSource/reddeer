@@ -286,10 +286,10 @@
 		</profile>
 
 		<!--
-			This is a shallow copy of the Artifactory Maven plug-in configuration of the Parent POM
+			This is a copy of the Artifactory Maven plug-in configuration of the Parent POM
 			(https://github.com/SonarSource/parent-oss) to be able to push to Repox (Artifactory)
-			as we cannot just add the parent POM for this project. It is kept very simple and all
-			the environment variables are coming from the Cirrus CI pipeline here.
+			as we cannot just add the parent POM for this project. All the environment variables
+			are coming from the Cirrus CI pipeline here.
 		-->
 		<profile>
 		      <id>deploy-sonarsource</id>
