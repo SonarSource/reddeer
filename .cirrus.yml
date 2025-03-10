@@ -201,7 +201,6 @@ promote_task:
     memory: 2G
     type: m6a.large
   env:
-    ARTIFACTORY_DEPLOY_REPO: sonarsource-public-qa
     ARTIFACTORY_PROMOTE_ACCESS_TOKEN: VAULT[development/artifactory/token/${CIRRUS_REPO_OWNER}-${CIRRUS_REPO_NAME}-promoter access_token]
     GITHUB_TOKEN: VAULT[development/github/token/${CIRRUS_REPO_OWNER}-${CIRRUS_REPO_NAME}-promotion token]
   promote_script:
