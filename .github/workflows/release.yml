@@ -4,7 +4,7 @@ on:
     types:
       - published
 
-# TODO: Replace the action with the released version and remove the `dryRun` option
+# TODO: Replace the action with the released version
 
 jobs:
   release:
@@ -16,3 +16,4 @@ jobs:
       publishToBinaries: true
       skipPythonReleasabilityChecks: true
       slackChannel: squad-ide-eclipse
+      pushToDatadog: false
