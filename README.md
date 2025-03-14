@@ -34,14 +34,15 @@ After that, run Maven, using Tycho, to build all bundles, features and the offic
 Site. We have to disable the tests as there are failing ones and the tests are not split from the
 main build like it is done on the SonarQube for Eclipse repository.
 
-> mvn clean verify -DskipTests
+> mvn clean verify
 
 ### Running unit / integration tests
 
 To run the unit / integration tests run Maven, using Tycho and the tests based on Eclipse
-[SWTBot](https://projects.eclipse.org/projects/technology.swtbot).
+[SWTBot](https://projects.eclipse.org/projects/technology.swtbot). The test profiles are configured
+for each sub-module in *tests*.
 
-> mvn clean verify -Dmaven.test.failure.ignore=true
+> mvn clean verify -Dmaven.test.failure.ignore=true -P{test bundle profile}
 
 This way the build does not fail fast and all tests are run and afterwards the results are
 available.
