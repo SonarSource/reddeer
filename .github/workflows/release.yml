@@ -4,14 +4,12 @@ on:
     types:
       - published
 
-# TODO: Replace the action with the released version
-
 jobs:
   release:
     permissions:
       id-token: write
       contents: write
-    uses: SonarSource/gh-action_release/.github/workflows/main.yaml@task/tha/SLE-1057_Checksum
+    uses: SonarSource/gh-action_release/.github/workflows/main.yaml@v5
     with:
       publishToBinaries: true
       skipPythonReleasabilityChecks: true
