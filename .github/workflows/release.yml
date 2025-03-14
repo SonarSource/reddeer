@@ -1,0 +1,17 @@
+name: Release
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  release:
+    permissions:
+      id-token: write
+      contents: write
+    uses: SonarSource/gh-action_release/.github/workflows/main.yaml@v5
+    with:
+      publishToBinaries: true
+      skipPythonReleasabilityChecks: true
+      slackChannel: squad-ide-eclipse
+      pushToDatadog: false
