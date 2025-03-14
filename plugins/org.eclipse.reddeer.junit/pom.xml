@@ -19,6 +19,6 @@
 	<parent>
 		<groupId>org.sonarsource.eclipse.reddeer</groupId>
 		<artifactId>plugins</artifactId>
-		<version>4.7.1-SNAPSHOT</version>
+		<version>4.7.2-SNAPSHOT</version>
 	</parent>
 </project>
