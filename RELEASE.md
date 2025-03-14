@@ -10,7 +10,7 @@ For releasing a new version of this Eclipse RedDeer fork, we rely on the
 1. Check whether the latest build works correctly with *SonarQube for Eclipse*. Do this by
    downloading the latest build artifact (P2 repository / Eclipse Update Site) and change the
    [Eclipse target platforms](https://github.com/SonarSource/sonarlint-eclipse/tree/master/target-platforms)
-   to reference the downloaded one.
+   to reference the downloaded one. You can download it either from Cirrus CI or Repox!
 
 2. Create a [GitHub release](https://github.com/SonarSource/reddeer/releases/new) with tag version
    `x.y.z.buildNumber` based on the last build artifact and with branch set to the correct one
@@ -18,9 +18,9 @@ For releasing a new version of this Eclipse RedDeer fork, we rely on the
 
 3. Await the GitHub action for the release process to run successfully. Check that the P2
    repository / Eclipse Update Site was successfully uploaded to
-   [SonarSource Binaries](https://binaries.sonarsource.com/?prefix=RedDeer/releases) both as a ZIP archive
-   and unpacked.
+   [SonarSource Binaries](https://binaries.sonarsource.com/?prefix=RedDeer/releases) both as a ZIP
+   archive and unpacked.
 
-4. Bump the version of the Maven/Tycho build:
+4. Bump the version of the Maven/Tycho build, then adjust the `Require-Bundle` statements:
 
 > mvn org.eclipse.tycho:tycho-versions-plugin:set-version -Dtycho.mode=maven -DnewVersion={new version}
