@@ -13,8 +13,7 @@ For releasing a new version of this Eclipse RedDeer fork, we rely on the
    to reference the downloaded one. You can download it either from Cirrus CI or Repox!
 
 2. Create a [GitHub release](https://github.com/SonarSource/reddeer/releases/new) with tag version
-   `x.y.z.buildNumber` based on the last build artifact and with branch set to the correct one
-   (either `master` for `4.7.x` or `branch-4.2.0` for `4.2.y`).
+   `x.y.z.buildNumber` based on the last build artifact and with branch set to `master`
 
 3. Await the GitHub action for the release process to run successfully. Check that the P2
    repository / Eclipse Update Site was successfully uploaded to
