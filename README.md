@@ -24,15 +24,9 @@ archived [Documentation](https://github.com/eclipse/reddeer/wiki).
 
 # Build the p2 repository (Eclipse Update Site) locally
 
-To build this fork locally, clone this repository and switch to the branch you want to build,
-currently there are two:
-
-- `master` based on the official `4.7.0` release adapted to our needs
-- `branch-4.2.0` based on the official `4.2.0` release adapted to our needs
-
-After that, run Maven, using Tycho, to build all bundles, features and the official Eclipse Update
-Site. We have to disable the tests as there are failing ones and the tests are not split from the
-main build like it is done on the SonarQube for Eclipse repository.
+To build this fork locally, run Maven, using Tycho, to build all bundles, features and the official
+Eclipse Update Site. We have to disable the tests as there are failing ones and the tests are not
+split from the main build like it is done on the SonarQube for Eclipse repository.
 
 > mvn clean verify
 
@@ -55,8 +49,8 @@ install the plug-in(s) inside the running application.
 
 ## Releasing the fork
 
-To release the fork (no matter if it is on `master` for `4.7.x` or `branch-4.2.0` for `4.2.y`) see
-the dedicated [Release Process Documentation](RELEASE.md).
+To release the fork (`master` for `4.7.x`) see the dedicated
+[Release Process Documentation](RELEASE.md).
 
 ## Local development environment
 
