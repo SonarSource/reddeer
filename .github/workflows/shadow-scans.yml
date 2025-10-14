@@ -14,16 +14,36 @@ jobs:
       id-token: write
       contents: write
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
       - uses: jdx/mise-action@c37c93293d6b742fc901e1406b8f764f6fb19dac # v2.4.4
         with:
-          version: 2025.7.12
-      - uses: SonarSource/ci-github-actions/build-maven@master
+          version: 2025.9.12
+      - uses: SonarSource/ci-github-actions/get-build-number@v1
+      - uses: SonarSource/ci-github-actions/config-maven@master # dogfood
+        env:
+          CURRENT_VERSION: skip
+          PROJECT_VERSION: skip
         with:
+          common-mvn-flags: -Declipse.p2.mirrors=false -Dmaven.test.skip=true -Dcyclonedx.skip=false
           artifactory-reader-role: private-reader
-          artifactory-deployer-role: qa-deployer
+      - name: Custom versioning
+        run: .github/workflows/set_maven_build_version_github_action
+      - name: Vault
+        id: secrets
+        uses: SonarSource/vault-action-wrapper@320bd31b03e5dacaac6be51bbbb15adf7caccc32 # 3.1.0
+        with:
+          secrets: |
+            development/artifactory/token/SonarSource-reddeer-public-deployer username | ARTIFACTORY_DEPLOY_USERNAME;
+            development/artifactory/token/SonarSource-reddeer-public-deployer access_token | ARTIFACTORY_DEPLOY_ACCESS_TOKEN;
+      - uses: SonarSource/ci-github-actions/build-maven@master # dogfood
+        env:
+          ARTIFACTORY_DEPLOY_USERNAME: ${{ fromJSON(steps.secrets.outputs.vault).ARTIFACTORY_DEPLOY_USERNAME }}
+          ARTIFACTORY_DEPLOY_ACCESS_TOKEN: ${{ fromJSON(steps.secrets.outputs.vault).ARTIFACTORY_ACCESS_TOKEN }}
+        with:
+          maven-args: -Dcommercial
+          artifactory-reader-role: private-reader
+          artifactory-deployer-role: public-deployer
           run-shadow-scans: true
-
       - name: Run IRIS Analysis
         uses: SonarSource/unified-dogfooding-actions/run-iris@v1
         with:

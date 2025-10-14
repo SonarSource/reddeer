@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="features" target="17" />
+      <module name="org.eclipse.reddeer.codegen" target="17" />
+      <module name="org.eclipse.reddeer.codegen.feature" target="17" />
+      <module name="org.eclipse.reddeer.common" target="17" />
+      <module name="org.eclipse.reddeer.common.test" target="17" />
+      <module name="org.eclipse.reddeer.core" target="17" />
+      <module name="org.eclipse.reddeer.core.test" target="17" />
+      <module name="org.eclipse.reddeer.direct" target="17" />
+      <module name="org.eclipse.reddeer.direct.test" target="17" />
+      <module name="org.eclipse.reddeer.e4" target="17" />
+      <module name="org.eclipse.reddeer.e4.feature" target="17" />
+      <module name="org.eclipse.reddeer.e4.workbench" target="17" />
+      <module name="org.eclipse.reddeer.e4.workbench.core" target="17" />
+      <module name="org.eclipse.reddeer.e4.workbench.test" target="17" />
+      <module name="org.eclipse.reddeer.eclipse" target="17" />
+      <module name="org.eclipse.reddeer.eclipse.feature" target="17" />
+      <module name="org.eclipse.reddeer.eclipse.test" target="17" />
+      <module name="org.eclipse.reddeer.gef" target="17" />
+      <module name="org.eclipse.reddeer.gef.spy" target="17" />
+      <module name="org.eclipse.reddeer.gef.spy.feature" target="17" />
+      <module name="org.eclipse.reddeer.gef.test" target="17" />
+      <module name="org.eclipse.reddeer.go" target="17" />
+      <module name="org.eclipse.reddeer.graphiti" target="17" />
+      <module name="org.eclipse.reddeer.graphiti.feature" target="17" />
+      <module name="org.eclipse.reddeer.graphiti.test" target="17" />
+      <module name="org.eclipse.reddeer.integration.test" target="17" />
+      <module name="org.eclipse.reddeer.jdt.junit" target="17" />
+      <module name="org.eclipse.reddeer.jface" target="17" />
+      <module name="org.eclipse.reddeer.jface.test" target="17" />
+      <module name="org.eclipse.reddeer.junit" target="17" />
+      <module name="org.eclipse.reddeer.junit.extension" target="17" />
+      <module name="org.eclipse.reddeer.junit.test" target="17" />
+      <module name="org.eclipse.reddeer.logparser" target="17" />
+      <module name="org.eclipse.reddeer.logparser.feature" target="17" />
+      <module name="org.eclipse.reddeer.recorder" target="17" />
+      <module name="org.eclipse.reddeer.recorder.feature" target="17" />
+      <module name="org.eclipse.reddeer.requirements" target="17" />
+      <module name="org.eclipse.reddeer.requirements.test" target="17" />
+      <module name="org.eclipse.reddeer.site" target="17" />
+      <module name="org.eclipse.reddeer.spy" target="17" />
+      <module name="org.eclipse.reddeer.spy.feature" target="17" />
+      <module name="org.eclipse.reddeer.swt" target="17" />
+      <module name="org.eclipse.reddeer.swt.feature" target="17" />
+      <module name="org.eclipse.reddeer.swt.test" target="17" />
+      <module name="org.eclipse.reddeer.tests.feature" target="17" />
+      <module name="org.eclipse.reddeer.ui" target="17" />
+      <module name="org.eclipse.reddeer.ui.feature" target="17" />
+      <module name="org.eclipse.reddeer.ui.test" target="17" />
+      <module name="org.eclipse.reddeer.uiforms" target="17" />
+      <module name="org.eclipse.reddeer.uiforms.test" target="17" />
+      <module name="org.eclipse.reddeer.workbench" target="17" />
+      <module name="org.eclipse.reddeer.workbench.core" target="17" />
+      <module name="org.eclipse.reddeer.workbench.test" target="17" />
+      <module name="parent" target="17" />
+      <module name="plugins" target="17" />
+      <module name="test-apps" target="17" />
+      <module name="tests" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
