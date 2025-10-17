@@ -24,7 +24,7 @@ jobs:
           CURRENT_VERSION: skip
           PROJECT_VERSION: skip
         with:
-          common-mvn-flags: -Declipse.p2.mirrors=false -Dmaven.test.skip=true -Dcyclonedx.skip=false
+          common-mvn-flags: -Declipse.p2.mirrors=false -Dmaven.test.skip=true -Dmaven.install.skip=true -Dcyclonedx.skip=false
           artifactory-reader-role: private-reader
       - name: Custom versioning
         run: .github/workflows/set_maven_build_version_github_action
