@@ -24,7 +24,7 @@ jobs:
           CURRENT_VERSION: skip
           PROJECT_VERSION: skip
         with:
-          common-mvn-flags: -Declipse.p2.mirrors=false -Dmaven.test.skip=true -Dmaven.install.skip=true -Dcyclonedx.skip=false
+          common-mvn-flags: -Declipse.p2.mirrors=false -Dmaven.test.skip=true -Dcyclonedx.skip=false
           artifactory-reader-role: private-reader
       - name: Custom versioning
         run: .github/workflows/set_maven_build_version_github_action
@@ -40,7 +40,7 @@ jobs:
           ARTIFACTORY_DEPLOY_USERNAME: ${{ fromJSON(steps.secrets.outputs.vault).ARTIFACTORY_DEPLOY_USERNAME }}
           ARTIFACTORY_DEPLOY_ACCESS_TOKEN: ${{ fromJSON(steps.secrets.outputs.vault).ARTIFACTORY_ACCESS_TOKEN }}
         with:
-          maven-args: -Dcommercial
+          maven-args: -Dcommercial -Dmaven.install.skip=true
           artifactory-reader-role: private-reader
           artifactory-deployer-role: public-deployer
           run-shadow-scans: true
