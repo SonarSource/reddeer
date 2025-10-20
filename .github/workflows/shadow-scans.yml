@@ -3,7 +3,6 @@ on:
   schedule:
     # Run the workflow every day at 04:00 UTC
     - cron: '0 4 * * *'
-  pull_request:
   workflow_dispatch:
 
 jobs:
