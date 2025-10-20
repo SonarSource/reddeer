@@ -27,7 +27,7 @@ jobs:
           common-mvn-flags: -Declipse.p2.mirrors=false -Dmaven.test.skip=true -Dcyclonedx.skip=false
           artifactory-reader-role: private-reader
       - name: Custom versioning
-        run: .github/scripts/set_maven_build_version_github_action.sh
+        run: .github/scripts/set_maven_build_version.sh
       - name: Vault
         id: secrets
         uses: SonarSource/vault-action-wrapper@320bd31b03e5dacaac6be51bbbb15adf7caccc32 # 3.1.0
