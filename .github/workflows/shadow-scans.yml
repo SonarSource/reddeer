@@ -1,0 +1,54 @@
+name: Unified Dogfooding scans
+on:
+  schedule:
+    # Run the workflow every day at 04:00 UTC
+    - cron: '0 4 * * *'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: github-ubuntu-latest-s
+    name: Run shadow scans
+    permissions:
+      id-token: write
+      contents: write
+    steps:
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+      - uses: jdx/mise-action@c37c93293d6b742fc901e1406b8f764f6fb19dac # v2.4.4
+        with:
+          version: 2025.9.12
+      - uses: SonarSource/ci-github-actions/get-build-number@v1
+      - uses: SonarSource/ci-github-actions/config-maven@master # Dogfood
+        env:
+          CURRENT_VERSION: skip
+          PROJECT_VERSION: skip
+        with:
+          common-mvn-flags: -Declipse.p2.mirrors=false -Dmaven.test.skip=true -Dcyclonedx.skip=false
+          artifactory-reader-role: private-reader
+      - name: Custom versioning
+        run: .github/scripts/set_maven_build_version.sh
+      - name: Vault
+        id: secrets
+        uses: SonarSource/vault-action-wrapper@320bd31b03e5dacaac6be51bbbb15adf7caccc32 # 3.1.0
+        with:
+          secrets: |
+            development/artifactory/token/SonarSource-reddeer-public-deployer username | ARTIFACTORY_DEPLOY_USERNAME;
+            development/artifactory/token/SonarSource-reddeer-public-deployer access_token | ARTIFACTORY_DEPLOY_ACCESS_TOKEN;
+      - uses: SonarSource/ci-github-actions/build-maven@master #dogfood
+        env:
+          ARTIFACTORY_DEPLOY_USERNAME: ${{ fromJSON(steps.secrets.outputs.vault).ARTIFACTORY_DEPLOY_USERNAME }}
+          ARTIFACTORY_DEPLOY_ACCESS_TOKEN: ${{ fromJSON(steps.secrets.outputs.vault).ARTIFACTORY_ACCESS_TOKEN }}
+        with:
+          maven-args: -Dcommercial
+          artifactory-reader-role: private-reader
+          artifactory-deployer-role: public-deployer
+          run-shadow-scans: true
+      - name: Run IRIS Analysis
+        uses: SonarSource/unified-dogfooding-actions/run-iris@v1
+        with:
+          primary_project_key: "SonarSource_reddeer"
+          primary_platform: "Next"
+          shadow1_project_key: "SonarSource_reddeer"
+          shadow1_platform: "SQC-EU"
+          shadow2_project_key: "SonarSource_reddeer"
+          shadow2_platform: "SQC-US"
