@@ -13,13 +13,14 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
+permissions:
+  id-token: write
+  contents: write
+
 jobs:
   build:
     runs-on: github-ubuntu-latest-s
     name: Build Project
-    permissions:
-      id-token: write
-      contents: write
     steps:
       - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
       - uses: jdx/mise-action@c37c93293d6b742fc901e1406b8f764f6fb19dac # v2.4.4
@@ -65,3 +66,135 @@ jobs:
         with:
           name: p2-repository
           path: site/target/org.eclipse.reddeer.site-*.zip
+
+  qa:
+    runs-on: github-ubuntu-latest-s
+    name: QA - ${{ matrix.bundle }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - bundle: org.eclipse.reddeer.common.test
+            profile: common-tests
+          - bundle: org.eclipse.reddeer.core.test
+            profile: core-tests
+          - bundle: org.eclipse.reddeer.direct.test
+            profile: direct-tests
+          - bundle: org.eclipse.reddeer.e4.workbench.test
+            profile: e4.workbench-tests
+          - bundle: org.eclipse.reddeer.gef.test
+            profile: gef-tests
+          - bundle: org.eclipse.reddeer.graphiti.test
+            profile: graphiti-tests
+          - bundle: org.eclipse.reddeer.jface.test
+            profile: jface-tests
+          - bundle: org.eclipse.reddeer.junit.test
+            profile: junit-tests
+          - bundle: org.eclipse.reddeer.requirements.test
+            profile: requirements-tests
+          - bundle: org.eclipse.reddeer.swt.test
+            profile: swt-tests
+          - bundle: org.eclipse.reddeer.ui.test
+            profile: ui-tests
+          - bundle: org.eclipse.reddeer.uiforms.test
+            profile: uiforms-tests
+          - bundle: org.eclipse.reddeer.workbench.test
+            profile: workbench-tests
+    env:
+      DISPLAY: :10
+      MAVEN_OPTS: -Xmx3072m
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+
+      - uses: jdx/mise-action@c37c93293d6b742fc901e1406b8f764f6fb19dac # v2.4.4
+        with:
+          version: 2025.9.12
+
+      - name: Install XVFB and dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            dbus-x11 \
+            ffmpeg \
+            metacity \
+            xvfb
+
+      - name: Setup Maven Toolchains
+        shell: bash
+        run: .github/scripts/setup-maven-toolchains.sh
+
+      - uses: SonarSource/ci-github-actions/get-build-number@v1
+
+      - uses: SonarSource/ci-github-actions/config-maven@master
+        env:
+          CURRENT_VERSION: skip
+          PROJECT_VERSION: skip
+        with:
+          common-mvn-flags: -Declipse.p2.mirrors=false -Dcyclonedx.skip=false
+          artifactory-reader-role: private-reader
+
+      - name: Custom versioning
+        run: .github/scripts/set_maven_build_version.sh
+
+      - name: Start XVFB and Metacity
+        run: |
+          set -euo pipefail
+          Xvfb $DISPLAY -listen tcp -ac -screen 0 1920x1080x24 > $GITHUB_WORKSPACE/Xvfb.out 2>&1 &
+          echo "XVFB_PID=$!" >> $GITHUB_ENV
+          metacity --sm-disable --replace &
+          sleep 10
+
+      - name: Start video recording
+        run: |
+          ffmpeg -loglevel warning -f x11grab -video_size 1920x1080 -i $DISPLAY \
+            -codec:v libx264 -r 12 $GITHUB_WORKSPACE/${{ matrix.bundle }}.mp4 &
+          echo "FFMPEG_PID=$!" >> $GITHUB_ENV
+
+      - name: Run tests for ${{ matrix.bundle }}
+        run: |
+          echo "Run unit / integration tests for bundle ${{ matrix.bundle }}"
+          mvn clean verify \
+            -B -e -V \
+            -P${{ matrix.profile }} \
+            -Dmaven.test.failure.ignore=true
+
+      - name: Stop video recording
+        if: always()
+        run: |
+          if [ -n "${FFMPEG_PID:-}" ]; then
+            kill -SIGINT $FFMPEG_PID || true
+            timeout 30 sh -c "while kill -0 $FFMPEG_PID 2>/dev/null; do sleep 1; done" || true
+          fi
+
+      - name: Stop XVFB
+        if: always()
+        run: |
+          if [ -n "${XVFB_PID:-}" ]; then
+            kill $XVFB_PID || true
+          fi
+
+      - name: Upload video recording
+        if: always() && !cancelled()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: recording-${{ matrix.bundle }}
+          path: ${{ github.workspace }}/${{ matrix.bundle }}.mp4
+          if-no-files-found: ignore
+
+      - name: Upload XVFB log
+        if: always() && !cancelled()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: xvfb-log-${{ matrix.bundle }}
+          path: ${{ github.workspace }}/Xvfb.out
+          if-no-files-found: ignore
+
+      - name: Upload test results
+        if: always() && !cancelled()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: test-results-${{ matrix.bundle }}
+          path: |
+            **/test-results/**/*.xml
+            **/target/surefire-reports/TEST-*.xml
+          if-no-files-found: ignore
