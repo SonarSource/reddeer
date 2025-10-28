@@ -176,7 +176,7 @@ jobs:
 
       - name: Upload video recording
         if: always() && !cancelled()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        uses: actions/upload-artifact@v4
         with:
           name: recording-${{ matrix.bundle }}
           path: ${{ github.workspace }}/${{ matrix.bundle }}.mp4
@@ -184,7 +184,7 @@ jobs:
 
       - name: Upload test results
         if: always() && !cancelled()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        uses: actions/upload-artifact@v4
         with:
           name: test-results-${{ matrix.bundle }}
           path: |
