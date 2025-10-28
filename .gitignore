@@ -11,8 +11,24 @@ target
 *.swp
 *.out
 !.github
-!.gitignore
 # Eclipse files
 .project
 .classpath
 .settings
+**org.eclipse.reddeer**
+parent.iml
+plugins.iml
+test-apps.iml
+tests.iml
+vcs.xml
+modules.xml
+misc.xml
+**Maven__org**
+**Maven__net**
+Maven__javax**
+jarRepositories.xml
+features.iml
+encodings.xml
+compiler.xml
+.idea\.gitignore
+**workspaces.xml**

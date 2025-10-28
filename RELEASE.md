@@ -10,7 +10,7 @@ For releasing a new version of this Eclipse RedDeer fork, we rely on the
 1. Check whether the latest build works correctly with *SonarQube for Eclipse*. Do this by
    downloading the latest build artifact (P2 repository / Eclipse Update Site) and change the
    [Eclipse target platforms](https://github.com/SonarSource/sonarlint-eclipse/tree/master/target-platforms)
-   to reference the downloaded one. You can download it either from Cirrus CI or Repox!
+   to reference the downloaded one. You can download it either from GitHub CI or Repox!
 
 2. Create a [GitHub release](https://github.com/SonarSource/reddeer/releases/new) with tag version
    `x.y.z.buildNumber` based on the last build artifact and with branch set to `master`

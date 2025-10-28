@@ -277,7 +277,7 @@
 
 		<!--
 			This module is failing on the unit/integration tests and therefore should only be
-			activated on build task of the Cirrus CI pipeline. It is also not required for building
+			activated on build task of the GitHub CI pipeline. It is also not required for building
 			everything related to the bundles/features that contain unit/integration tests.
 		-->
 		<profile>
@@ -291,7 +291,7 @@
 			This is a copy of the Artifactory Maven plug-in configuration of the Parent POM
 			(https://github.com/SonarSource/parent-oss) to be able to push to Repox (Artifactory)
 			as we cannot just add the parent POM for this project. All the environment variables
-			are coming from the Cirrus CI pipeline here.
+			are coming from the GitHub CI pipeline here.
 		-->
 		<profile>
 		      <id>deploy-sonarsource</id>
@@ -347,8 +347,7 @@
 		                      GITHUB_BRANCH,
 		                      ARTIFACTS_TO_PUBLISH,
 		                      *_VERSION,
-		                      JAVA,
-		                      CIRRUS_CHANGE_MESSAGE,
+		                      JAVA
 		                      PROJECT,
 		                      ARTIFACTORY_DEPLOY_REPO,
 		                      ARTIFACTORY_DEPLOY_USERNAME,
