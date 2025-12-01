@@ -77,7 +77,7 @@
 						<dependency>
 							<type>p2-installable-unit</type>
 							<artifactId>org.eclipse.platform</artifactId>
-							<version>0.0.0</version>
+							<version>4.29.0.v20230903-1000</version>
 						</dependency>
 						<!-- 
 						<dependency>
@@ -94,17 +94,17 @@
 						<dependency>
 							<type>p2-installable-unit</type>
 							<artifactId>org.eclipse.jdt.ui</artifactId>
-							<version>0.0.0</version>
+							<version>3.30.0.v20230822-0733</version>
 						</dependency>
 						<dependency>
 							<type>p2-installable-unit</type>
 							<artifactId>org.eclipse.jdt.junit</artifactId>
-							<version>0.0.0</version>
+							<version>3.16.100.v20230822-0733</version>
 						</dependency>
 						<dependency>
 							<type>p2-installable-unit</type>
 							<artifactId>org.eclipse.e4.rcp.feature.group</artifactId>
-							<version>0.0.0</version>
+							<version>4.29.0.v20230825-1346</version>
 						</dependency>
 					</dependencies>
 					<includes>

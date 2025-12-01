@@ -53,7 +53,7 @@
 								<dependency>
 									<type>p2-installable-unit</type>
 									<artifactId>org.eclipse.jdt.feature.group</artifactId>
-									<version>0.0.0</version>
+									<version>3.19.200.v20230903-1000</version>
 								</dependency>
 							</dependencies>
 						</configuration>

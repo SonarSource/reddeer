@@ -59,7 +59,7 @@
 								<dependency>
 									<type>p2-installable-unit</type>
 									<artifactId>org.eclipse.jdt.feature.group</artifactId>
-									<version>0.0.0</version>
+									<version>3.19.200.v20230903-1000</version>
 								</dependency>
 							</dependencies>
 						</configuration>
@@ -97,7 +97,7 @@
 								<dependency>
 									<type>p2-installable-unit</type>
 									<artifactId>org.eclipse.jst.server_adapters.ext.feature.feature.group</artifactId>
-									<version>0.0.0</version>
+									<version>3.4.700.v202308172116</version>
 								</dependency>
 					</dependencies>
 				</configuration>

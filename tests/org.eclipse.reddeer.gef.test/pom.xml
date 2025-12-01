@@ -51,9 +51,13 @@
 					<dependencies combine.children="append">
 						<dependency>
 							<type>p2-installable-unit</type>
-							<artifactId>org.eclipse.gef.feature.feature.group</artifactId>
+							<artifactId>org.eclipse.gef.feature.group</artifactId>
+							<version>3.10.1.201508170204</version>
+						</dependency>
+						<dependency>
+							<type>p2-installable-unit</type>
 							<artifactId>org.eclipse.gef.examples.feature.group</artifactId>
-							<version>0.0.0</version>
+							<version>3.10.1.201508170204</version>
 						</dependency>
 					</dependencies>
 				</configuration>

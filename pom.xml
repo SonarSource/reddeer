@@ -22,12 +22,12 @@
 	<properties>
 		<tycho-version>2.7.5</tycho-version>
 		<tychoExtrasVersion>${tycho-version}</tychoExtrasVersion>
-		<eclipse-target-site>https://download.eclipse.org/releases/2023-09/</eclipse-target-site>
+		<eclipse-target-site>https://download.eclipse.org/releases/2023-09/202309131000</eclipse-target-site>
 		<swtbot-update-site>https://download.eclipse.org/technology/swtbot/snapshots/</swtbot-update-site>
         <!-- when making final release, switch from S to R latest update site - https://github.com/eclipse/reddeer/issues/2100 -->
         <!--eclipse-orbit-update-site>https://download.eclipse.org/tools/orbit/downloads/latest-R/</eclipse-orbit-update-site-->
         <!--eclipse-orbit-update-site>https://download.eclipse.org/tools/orbit/downloads/latest-S/</eclipse-orbit-update-site-->
-        <eclipse-oomph-update-site>https://download.eclipse.org/oomph/simrel-orbit/2023-09/</eclipse-oomph-update-site>
+        <eclipse-oomph-update-site>https://download.eclipse.org/oomph/simrel-orbit/nightly/N202306301409/</eclipse-oomph-update-site>
 		<cbi-repo-site>https://repo.eclipse.org/content/repositories/cbi-releases/</cbi-repo-site>
 		<download-plugin-version>1.2.1</download-plugin-version>
 		<java.target.version>17</java.target.version>
@@ -300,6 +300,7 @@
 		          <plugin>
 		            <groupId>org.apache.maven.plugins</groupId>
 		            <artifactId>maven-enforcer-plugin</artifactId>
+                	<version>3.5.0</version>
 		            <executions>
 		              <execution>
 		                <id>enforce-deploy-settings</id>
