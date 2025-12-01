@@ -52,7 +52,7 @@
 								<dependency>
 									<type>p2-installable-unit</type>
 									<artifactId>org.eclipse.jdt.feature.group</artifactId>
-									<version>0.0.0</version>
+									<version>3.19.200.v20230903-1000</version>
 								</dependency>
 							</dependencies>
 						</configuration>
@@ -80,7 +80,7 @@
 					  <dependency>
 					    <type>p2-installable-unit</type>
 					    <artifactId>org.eclipse.m2e.feature.feature.group</artifactId>
-					    <version>0.0.0</version>
+					    <version>2.4.100.20230827-1557</version>
 					  </dependency>
 					</dependencies>
 				</configuration>

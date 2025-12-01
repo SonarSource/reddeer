@@ -45,7 +45,7 @@
 							<type>p2-installable-unit</type>
 							<artifactId>org.eclipse.graphiti.feature.feature.group</artifactId>
 							<artifactId>org.eclipse.graphiti.feature.examples.feature.group</artifactId>
-							<version>0.0.0</version>
+							<version>0.19.1.202211181144</version>
 						</dependency>
 					</dependencies>
 				</configuration>
