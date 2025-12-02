@@ -23,7 +23,6 @@
 		<tycho-version>2.7.5</tycho-version>
 		<tychoExtrasVersion>${tycho-version}</tychoExtrasVersion>
 		<eclipse-target-site>https://download.eclipse.org/releases/2023-09/202309131000</eclipse-target-site>
-		<swtbot-update-site>https://download.eclipse.org/technology/swtbot/snapshots/</swtbot-update-site>
         <!-- when making final release, switch from S to R latest update site - https://github.com/eclipse/reddeer/issues/2100 -->
         <!--eclipse-orbit-update-site>https://download.eclipse.org/tools/orbit/downloads/latest-R/</eclipse-orbit-update-site-->
         <!--eclipse-orbit-update-site>https://download.eclipse.org/tools/orbit/downloads/latest-S/</eclipse-orbit-update-site-->
@@ -193,17 +192,6 @@
 		<repository>
 			<id>eclipse-target-site</id>
 			<url>${eclipse-target-site}</url>
-			<layout>p2</layout>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-		</repository>
-		<repository>
-			<id>swtbot-update-site</id>
-			<url>${swtbot-update-site}</url>
 			<layout>p2</layout>
 			<snapshots>
 				<enabled>true</enabled>
