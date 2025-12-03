@@ -216,30 +216,6 @@
 				<module>jacoco-report</module>
 			</modules>
 		</profile>
-		<profile>
-			<id>eclipse-sign</id>
-			<build>
-			    <plugins>
-					<plugin>
-						<groupId>org.eclipse.tycho</groupId>
-						<artifactId>tycho-p2-plugin</artifactId>
-						<version>${tycho-version}</version>
-						<executions>
-							<execution>
-								<id>p2-metadata</id>
-								<goals>
-									<goal>p2-metadata</goal>
-								</goals>
-								<phase>verify</phase>
-							</execution>
-						</executions>
-						<configuration>
-							<defaultP2Metadata>false</defaultP2Metadata>
-						</configuration>
-					</plugin>
-			    </plugins>
-		    </build>			
-		</profile>
 
 		<!--
 			This module is failing on the unit/integration tests and therefore should only be
