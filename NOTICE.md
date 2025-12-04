@@ -57,10 +57,6 @@ hsqldb (2.3.0)
 
 * License: New BSD license
 
-Mockito (4.8.1)
-
-* License: MIT
-
 org.junit (4.13.2)
 
 * License: EPL-1.0 AND EPL-2.0
