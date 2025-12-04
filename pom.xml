@@ -23,10 +23,6 @@
 		<tycho-version>2.7.5</tycho-version>
 		<tychoExtrasVersion>${tycho-version}</tychoExtrasVersion>
 		<eclipse-target-site>https://download.eclipse.org/releases/2023-09/202309131000</eclipse-target-site>
-        <!-- when making final release, switch from S to R latest update site - https://github.com/eclipse/reddeer/issues/2100 -->
-        <!--eclipse-orbit-update-site>https://download.eclipse.org/tools/orbit/downloads/latest-R/</eclipse-orbit-update-site-->
-        <!--eclipse-orbit-update-site>https://download.eclipse.org/tools/orbit/downloads/latest-S/</eclipse-orbit-update-site-->
-        <eclipse-oomph-update-site>https://download.eclipse.org/oomph/simrel-orbit/nightly/N202306301409/</eclipse-oomph-update-site>
 		<download-plugin-version>1.2.1</download-plugin-version>
 		<java.target.version>17</java.target.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -198,11 +194,6 @@
 			<releases>
 				<enabled>true</enabled>
 			</releases>
-		</repository>
-		<repository>
-			<id>eclipse-oomph-update-site</id>
-			<url>${eclipse-oomph-update-site}</url>
-			<layout>p2</layout>
 		</repository>
 	</repositories>
 
