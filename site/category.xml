@@ -26,7 +26,7 @@
 		<description>RedDeer Sources: Contains RedDeer source features.</description>
 	</category-def>
 	<category-def label="5. RedDeer Graphiti" name="GraphitiFeatures">
-		<description>RedDeer Graphiti: Graphiti, GEF features, tools and its sources</description>
+		<description>RedDeer Graphiti: Graphiti, tools and its sources</description>
 	</category-def>
     <category-def label="6. RedDeer Tests" name="TestFeatures">
 		<description>RedDeer Tests: Contains RedDeer tests and tools.</description>
@@ -53,10 +53,6 @@
 	
 	<feature url="org.eclipse.reddeer.spy.feature.qualifier" id="org.eclipse.reddeer.spy.feature" version="0.0.0">
 		<category name="ToolFeatures"/>
-	</feature>
-
-	<feature url="org.eclipse.reddeer.gef.spy.feature.qualifier" id="org.eclipse.reddeer.gef.spy.feature" version="0.0.0">
-		<category name="GraphitiFeatures"/>
 	</feature>
 
     <feature url="org.eclipse.reddeer.logparser.feature.qualifier" id="org.eclipse.reddeer.logparser.feature" version="0.0.0">

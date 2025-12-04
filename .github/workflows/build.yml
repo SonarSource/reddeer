@@ -42,7 +42,7 @@ jobs:
           artifactory-reader-role: private-reader
 
       - name: Custom versioning
-        run: .github/scripts/set_maven_build_version.sh
+        run: .github/scripts/set_maven_build_version.sh                 
       - name: Vault
         id: secrets
         uses: SonarSource/vault-action-wrapper@v3
@@ -83,8 +83,6 @@ jobs:
             profile: direct-tests
           - bundle: org.eclipse.reddeer.e4.workbench.test
             profile: e4.workbench-tests
-          - bundle: org.eclipse.reddeer.gef.test
-            profile: gef-tests
           - bundle: org.eclipse.reddeer.graphiti.test
             profile: graphiti-tests
           - bundle: org.eclipse.reddeer.jface.test

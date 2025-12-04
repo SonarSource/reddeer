@@ -27,7 +27,6 @@
 	<modules>
 		<module>org.eclipse.reddeer.e4.feature</module>
 		<module>org.eclipse.reddeer.eclipse.feature</module>
-		<module>org.eclipse.reddeer.gef.spy.feature</module>
 		<module>org.eclipse.reddeer.swt.feature</module>
 		<module>org.eclipse.reddeer.tests.feature</module>
 		<module>org.eclipse.reddeer.ui.feature</module>
