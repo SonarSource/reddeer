@@ -24,10 +24,6 @@ unit/integration tests of all test bundles are disabled.
 
 > mvn clean verify -Dmaven.test.failure.ignore=true -Peclipse-tests
 
-## org.eclipse.reddeer.gef.test
-
-> mvn clean verify -Dmaven.test.failure.ignore=true -Pgef-tests
-
 ## org.eclipse.reddeer.graphiti.test
 
 > mvn clean verify -Dmaven.test.failure.ignore=true -Pgraphiti-tests
