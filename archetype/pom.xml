@@ -93,22 +93,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
-	<!-- For deployment of archetype to Nexus -->
-	<!-- Don't change "id" since it should match credentials entry in $M2_REPO/settings.xml -->
-	<distributionManagement>
-		<snapshotRepository>
-			<id>jboss-snapshots-repository</id>
-			<name>JBoss Snapshots Repository</name>
-			<url>https://repository.jboss.org/nexus/content/repositories/snapshots/</url>
-			<uniqueVersion>false</uniqueVersion>
-		</snapshotRepository>
-		<repository>
-			<id>jboss-releases-repository</id>
-			<name>JBoss Releases Repository</name>
-			<uniqueVersion>false</uniqueVersion>
-			<url>https://repository.jboss.org/nexus/service/local/staging/deploy/maven2/</url>
-		</repository>
-	</distributionManagement>
-
 </project>
