@@ -50,7 +50,6 @@
 		<module>org.eclipse.reddeer.uiforms.test</module>
 		<module>org.eclipse.reddeer.jface.test</module>
 		<module>org.eclipse.reddeer.eclipse.test</module>
-		<module>org.eclipse.reddeer.graphiti.test</module>
 		<module>org.eclipse.reddeer.direct.test</module>
 		<module>org.eclipse.reddeer.junit.test</module>
 		<module>org.eclipse.reddeer.requirements.test</module>
