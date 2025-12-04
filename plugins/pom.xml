@@ -36,7 +36,6 @@
 		<module>org.eclipse.reddeer.uiforms</module>
 		<module>org.eclipse.reddeer.jface</module>
 		<module>org.eclipse.reddeer.eclipse</module>
-		<module>org.eclipse.reddeer.graphiti</module>
 		<module>org.eclipse.reddeer.direct</module>
 		<module>org.eclipse.reddeer.junit</module>
         <module>org.eclipse.reddeer.jdt.junit</module>

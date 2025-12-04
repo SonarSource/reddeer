@@ -83,8 +83,6 @@ jobs:
             profile: direct-tests
           - bundle: org.eclipse.reddeer.e4.workbench.test
             profile: e4.workbench-tests
-          - bundle: org.eclipse.reddeer.graphiti.test
-            profile: graphiti-tests
           - bundle: org.eclipse.reddeer.jface.test
             profile: jface-tests
           - bundle: org.eclipse.reddeer.junit.test
