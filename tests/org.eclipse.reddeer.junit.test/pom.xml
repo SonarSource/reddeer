@@ -17,6 +17,12 @@
 	<name>RedDeer JUnit Tests</name>
 	<packaging>eclipse-test-plugin</packaging>
 
+	<properties>
+		<jackson-version>2.20</jackson-version>
+		<hamcrest-version>3.0</hamcrest-version>
+		<mockito-version>5.20.0</mockito-version>
+	</properties>
+
 	<parent>
 		<groupId>org.sonarsource.eclipse.reddeer</groupId>
 		<artifactId>tests</artifactId>
@@ -31,23 +37,61 @@
 			<version>${project.version}</version>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${jackson-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-core</artifactId>
+			<version>${hamcrest-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>${mockito-version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-surefire-plugin</artifactId>
+				<artifactId>tycho-compiler-plugin</artifactId>
 				<configuration>
-					<dependencies combine.children="append">
-						<dependency>
-							<type>p2-installable-unit</type>
-							<artifactId>org.hamcrest</artifactId>
-							<version>2.2.0</version>
-						</dependency>
-					</dependencies>
+					<extraClasspathElements>
+						<extraClasspathElement>
+							<groupId>org.mockito</groupId>
+							<artifactId>mockito-core</artifactId>
+							<version>${mockito-version}</version>
+						</extraClasspathElement>
+					</extraClasspathElements>
 				</configuration>
 			</plugin>
+		<plugin>
+			<groupId>org.eclipse.tycho</groupId>
+			<artifactId>tycho-surefire-plugin</artifactId>
+			<configuration>
+				<extraClasspathElements>
+					<extraClasspathElement>
+						<groupId>com.fasterxml.jackson.core</groupId>
+						<artifactId>jackson-annotations</artifactId>
+						<version>${jackson-version}</version>
+					</extraClasspathElement>
+					<extraClasspathElement>
+						<groupId>org.hamcrest</groupId>
+						<artifactId>hamcrest-core</artifactId>
+						<version>${hamcrest-version}</version>
+					</extraClasspathElement>
+					<extraClasspathElement>
+						<groupId>org.mockito</groupId>
+						<artifactId>mockito-core</artifactId>
+						<version>${mockito-version}</version>
+					</extraClasspathElement>
+				</extraClasspathElements>
+			</configuration>
+		</plugin>
 		</plugins>
 	</build>
 
