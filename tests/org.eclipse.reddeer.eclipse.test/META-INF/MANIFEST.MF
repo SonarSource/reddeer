@@ -7,7 +7,6 @@ Bundle-Version: 4.7.2.qualifier
 Bundle-Activator: org.eclipse.reddeer.eclipse.test.Activator
 Require-Bundle: org.eclipse.equinox.p2.ui.sdk,
  org.eclipse.reddeer.go;bundle-version="[2.2.0,4.7.3)",
- org.eclipse.reddeer.gef;bundle-version="[2.2.0,4.7.3)",
  org.eclipse.jst.servlet.ui,
  org.eclipse.jdt.debug.ui,
  org.eclipse.ui.forms,
