@@ -22,7 +22,7 @@
 	<properties>
 		<tycho-version>2.7.5</tycho-version>
 		<tychoExtrasVersion>${tycho-version}</tychoExtrasVersion>
-		<eclipse-target-site>https://download.eclipse.org/releases/2023-09/202309131000</eclipse-target-site>
+		<eclipse-target-site>https://repox.jfrog.io/artifactory/eclipse-releases-2023-09/202309131000</eclipse-target-site>
 		<download-plugin-version>1.2.1</download-plugin-version>
 		<java.target.version>17</java.target.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
