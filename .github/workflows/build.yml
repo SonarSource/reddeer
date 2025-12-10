@@ -41,8 +41,12 @@ jobs:
           common-mvn-flags: -Declipse.p2.mirrors=false -Dmaven.test.skip=true -Dcyclonedx.skip=false
           artifactory-reader-role: private-reader
 
+      - name: Setup settings.xml
+        run: .github/scripts/setup-settings-xml.sh
+
       - name: Custom versioning
-        run: .github/scripts/set_maven_build_version.sh                 
+        run: .github/scripts/set_maven_build_version.sh
+
       - name: Vault
         id: secrets
         uses: SonarSource/vault-action-wrapper@v3
@@ -122,7 +126,7 @@ jobs:
 
       - uses: SonarSource/ci-github-actions/get-build-number@v1
 
-      - uses: SonarSource/ci-github-actions/config-maven@master
+      - uses: SonarSource/ci-github-actions/config-maven@v1
         env:
           CURRENT_VERSION: skip
           PROJECT_VERSION: skip
@@ -132,6 +136,9 @@ jobs:
 
       - name: Custom versioning
         run: .github/scripts/set_maven_build_version.sh
+
+      - name: Setup settings.xml
+        run: .github/scripts/setup-settings-xml.sh
 
       - name: Start XVFB and Metacity
         run: |
