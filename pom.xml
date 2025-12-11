@@ -24,6 +24,8 @@
 		<tychoExtrasVersion>${tycho-version}</tychoExtrasVersion>
 		<download-plugin-version>1.2.1</download-plugin-version>
 		<java.target.version>17</java.target.version>
+		<!-- Prevent Tycho from following repository references in p2 metadata -->
+		<tycho.p2.resolver.includeReferencedRepositories>false</tycho.p2.resolver.includeReferencedRepositories>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- In the update site's site/pom.xml (that calls jbosstools-maven-plugins/tycho-plugins/repository-utils) 
 			you can override this value to be Nightly Build, Development Milestone, or 
