@@ -120,7 +120,6 @@
 				<configuration>
 					<resolver>p2</resolver>
 					<ignoreTychoRepositories>true</ignoreTychoRepositories>
-					<pomDependencies>consider</pomDependencies>
 					<environments>
 						<environment>
 							<os>macosx</os>
