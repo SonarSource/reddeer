@@ -57,6 +57,23 @@
 		<module>site</module>
 	</modules>
 
+	<dependencyManagement>
+		<dependencies>
+			<!-- Security: Fix CVE-2024-29857, CVE-2024-30172, CVE-2025-8885, CVE-2025-8916, CVE-2024-30171, CVE-2024-34447 -->
+			<dependency>
+				<groupId>org.bouncycastle</groupId>
+				<artifactId>bcprov-jdk18on</artifactId>
+				<version>1.78.1</version>
+			</dependency>
+			<!-- Security: Fix CVE-2024-47554 -->
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>2.14.0</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<resources>
@@ -103,6 +120,7 @@
 				<configuration>
 					<resolver>p2</resolver>
 					<ignoreTychoRepositories>true</ignoreTychoRepositories>
+					<pomDependencies>consider</pomDependencies>
 					<environments>
 						<environment>
 							<os>macosx</os>
