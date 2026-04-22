@@ -13,5 +13,5 @@ jobs:
     with:
       publishToBinaries: true
       skipPythonReleasabilityChecks: true
-      slackChannel: squad-ide-private
+      slackChannel: C02E6L5C01H # squad-devex-private
       pushToDatadog: false
