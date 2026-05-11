@@ -12,13 +12,13 @@ For releasing a new version of this Eclipse RedDeer fork, we rely on the
    [Eclipse target platforms](https://github.com/SonarSource/sonarlint-eclipse/tree/master/target-platforms)
    to reference the downloaded one. You can download it either from GitHub CI or Repox!
 
-2. Create a [GitHub release](https://github.com/SonarSource/reddeer/releases/new) with tag version
-   `x.y.z.buildNumber` based on the last build artifact and with branch set to `master`
+2. Go to [Actions → Release → Run workflow](https://github.com/SonarSource/reddeer/actions/workflows/release.yml)
+   and enter the full version string (e.g. `x.y.z.buildNumber`), then click **Run workflow**.
 
-3. Await the GitHub action for the release process to run successfully. Check that the P2
+3. Await the workflow run to complete successfully. Check that the P2
    repository / Eclipse Update Site was successfully uploaded to
    [SonarSource Binaries](https://binaries.sonarsource.com/?prefix=RedDeer/releases) both as a ZIP
-   archive and unpacked.
+   archive and unpacked. The GitHub release and tag are created automatically by the workflow.
 
 4. Bump the version of the Maven/Tycho build, then adjust the `Require-Bundle` statements:
 
