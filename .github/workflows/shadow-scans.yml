@@ -17,6 +17,9 @@ jobs:
       - uses: jdx/mise-action@c37c93293d6b742fc901e1406b8f764f6fb19dac # v2.4.4
         with:
           version: 2025.9.12
+      - name: Setup Maven Toolchains
+        shell: bash
+        run: .github/scripts/setup-maven-toolchains.sh
       - uses: SonarSource/ci-github-actions/get-build-number@v1
       - uses: SonarSource/ci-github-actions/config-maven@master # Dogfood
         env:
@@ -25,6 +28,8 @@ jobs:
         with:
           common-mvn-flags: -Declipse.p2.mirrors=false -Dmaven.test.skip=true -Dcyclonedx.skip=false
           artifactory-reader-role: private-reader
+      - name: Setup settings.xml
+        run: .github/scripts/setup-settings-xml.sh
       - name: Custom versioning
         run: .github/scripts/set_maven_build_version.sh
       - name: Vault
