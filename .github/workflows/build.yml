@@ -31,9 +31,9 @@ jobs:
         shell: bash
         run: .github/scripts/setup-maven-toolchains.sh
 
-      - uses: SonarSource/ci-github-actions/get-build-number@v1
+      - uses: SonarSource/ci-github-actions/get-build-number@v2
 
-      - uses: SonarSource/ci-github-actions/config-maven@v1
+      - uses: SonarSource/ci-github-actions/config-maven@v2
         env:
           CURRENT_VERSION: skip
           PROJECT_VERSION: skip
@@ -55,7 +55,7 @@ jobs:
             development/artifactory/token/SonarSource-reddeer-public-deployer username | ARTIFACTORY_DEPLOY_USERNAME;
             development/artifactory/token/SonarSource-reddeer-public-deployer access_token | ARTIFACTORY_DEPLOY_ACCESS_TOKEN;
 
-      - uses: SonarSource/ci-github-actions/build-maven@v1
+      - uses: SonarSource/ci-github-actions/build-maven@v2
         env:
           ARTIFACTORY_DEPLOY_USERNAME: ${{ fromJSON(steps.secrets.outputs.vault).ARTIFACTORY_DEPLOY_USERNAME }}
           ARTIFACTORY_DEPLOY_ACCESS_TOKEN: ${{ fromJSON(steps.secrets.outputs.vault).ARTIFACTORY_ACCESS_TOKEN }}
@@ -124,9 +124,9 @@ jobs:
         shell: bash
         run: .github/scripts/setup-maven-toolchains.sh
 
-      - uses: SonarSource/ci-github-actions/get-build-number@v1
+      - uses: SonarSource/ci-github-actions/get-build-number@v2
 
-      - uses: SonarSource/ci-github-actions/config-maven@v1
+      - uses: SonarSource/ci-github-actions/config-maven@v2
         env:
           CURRENT_VERSION: skip
           PROJECT_VERSION: skip
@@ -217,6 +217,6 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - uses: SonarSource/ci-github-actions/promote@v1
+      - uses: SonarSource/ci-github-actions/promote@v2
         with:
           promote-pull-request: true
