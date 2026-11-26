@@ -44,7 +44,7 @@
 		<sonar.projectKey>SonarSource_reddeer</sonar.projectKey>
 
 		<!-- Plug-in used to deploy the build to Repox -->
-		<version.artifactory.plugin>3.5.1</version.artifactory.plugin>
+		<version.artifactory.plugin>3.7.1</version.artifactory.plugin>
 		<gitRepositoryName>reddeer</gitRepositoryName>
 		<artifactsToPublish>${project.groupId}:org.eclipse.reddeer.site:zip</artifactsToPublish>
 	</properties>
