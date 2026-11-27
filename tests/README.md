@@ -26,6 +26,9 @@ unit/integration tests of all test bundles are disabled.
 
 ## org.eclipse.reddeer.integration.test
 
+This optional profile runs the installation E2E test through the Eclipse UI. The regular CI matrix
+omits this profile.
+
 > mvn clean verify -Dmaven.test.failure.ignore=true -Pintegration-tests
 
 ## org.eclipse.reddeer.jface.test
